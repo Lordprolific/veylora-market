@@ -15,3 +15,6 @@ begin
       check (settlement_address is null or settlement_address ~ '^(tm|t2)[a-km-zA-HJ-NP-Z1-9]{25,40}$');
   end if;
 end $$;
+
+-- The beta market currency is testnet TAZ, not mainnet ZEC.
+alter table public.markets alter column currency set default 'TAZ';
