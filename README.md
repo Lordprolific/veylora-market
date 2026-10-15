@@ -26,9 +26,9 @@ See [docs/TESTNET-INTEGRATION.md](./docs/TESTNET-INTEGRATION.md) for the verifie
 
 ## Critical limits
 - Demo bids exist only in browser state and are not persistent.
-- Trusted market enforcement is incomplete. Close-time enforcement, bid validation, winner selection, tie-breaks, rate limits, idempotent settlement transitions and audit receipts must be server-enforced before any valuable trade.
+- The server-side close-and-award and testnet settlement endpoints are now scaffolded, but require server-only Supabase service-role and restricted testnet RPC configuration plus integration testing. Durable rate limiting, atomic database transactions and a reviewed audit trail remain required before any valuable trade.
 - The schema is a starting point and needs a security review; it does not itself provide complete bid immutability or robust concurrency controls.
-- The app can query a configured testnet node for transparent-output evidence; it does not send transactions, verify shielded payment details, or complete a trade. A txid alone is not proof of payment.
+- The app can query a configured testnet node for transparent-output evidence, and the owner can record completion only after three-confirmation verification. It does not send transactions or verify shielded payment details. A txid alone is not proof of payment.
 - Shielded Zcash does not automatically hide app metadata or bids. The platform operator may access stored bid data. This is not operator-blind or zero-knowledge auction execution.
 - Do not use this beta for valuable trades.
 
