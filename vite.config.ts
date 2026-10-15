@@ -7,8 +7,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
-        testnet: resolve(__dirname, 'testnet.html'),
+        main: resolve(process.cwd(), 'index.html'),
+        testnet: resolve(process.cwd(), 'testnet.html'),
       },
     },
   },
