@@ -1,6 +1,6 @@
-import { errorResponse, RpcOutput, RpcTransaction, sendJson, zcashRpc } from '../_lib/zcash-rpc'
+import { allowRequest, clientKey, errorResponse, RpcOutput, RpcTransaction, sendJson, zcashRpc } from '../_lib/zcash-rpc'
 
-type Request = { method?: string; body?: unknown }
+type Request = { method?: string; body?: unknown; headers?: Record<string, string | string[] | undefined> }
 type Response = { status: (code: number) => { json: (body: unknown) => unknown } }
 
 function parseBody(body: unknown): { txid: string; recipient: string; amount: number; minConfirmations: number } | null {
@@ -25,7 +25,7 @@ function outputAddresses(output: RpcOutput): string[] {
 
 export default async function handler(req: Request, res: Response) {
   if (req.method !== 'POST') return sendJson(res, 405, { ok: false, error: 'Use POST.' })
-  const input = parseBody(req.body)
+  if (!allowRequest(clientKey(req.headers), 12)) return sendJson(res, 429, { ok: false, verified: false, error: 'Too many verification attempts. Try again shortly.' })\n  const input = parseBody(req.body)
   if (!input) return sendJson(res, 400, { ok: false, error: 'Provide a valid 64-character txid, transparent recipient address, positive amount, and confirmation threshold.' })
   try {
     const info = await zcashRpc<{ chain?: string }>('getblockchaininfo')
