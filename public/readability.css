@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+/* Readability system: legibility takes priority over decorative microtype. */
+:root {
+  --display: 'DM Sans', 'Inter', Arial, sans-serif;
+  --body: 'Inter', Arial, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --muted: #a8adb7;
+  font-family: var(--body);
+  font-size: 14px;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body, button, input, textarea {
+  font-family: var(--body);
+  font-size: 14px;
+}
+h1, h2, h3, h4, .brand b, .modal h2, .section-head h2,
+.flow-intro h2, .settlement h2, .pulse-top h2, .market h3,
+.flow-step h3 {
+  font-family: var(--display);
+  font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+}
+.hero h1 {
+  font-size: clamp(3rem, 6.2vw, 5rem);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -.045em;
+  max-width: 900px;
+}
+.hero > p, .flow-intro p, .section-head p, .settlement > div > p,
+.notice p, .privacy p, .market .desc, .flow-step p, .modal > p {
+  color: #b0b5bf;
+  font-size: 13px;
+  line-height: 1.8;
+  letter-spacing: 0;
+}
+nav button, .primary, .quiet, .text-btn {
+  font-size: 12px;
+  font-weight: 600;
+}
+.brand b { font-size: 12px; }
+.brand small { font-size: 10px; color: #a4a9b3; }
+.eyebrow, .step-meta, .pulse-feature-head, .pulse-feature-foot,
+.pulse-event-meta small, .pulse-amount small, .pulse-amount span,
+.activity-transfer small, .activity-value small, .activity-foot,
+.tag, .status, .facts small, .card-foot > span, .list-foot,
+.receipt-head small, .receipt-head > span, .fine {
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.55;
+}
+.eyebrow { color: #c5cad3; letter-spacing: .12em; }
+.tag, .status, .facts small, .card-foot > span, .list-foot,
+.receipt-head small, .receipt-head > span, .fine,
+.pulse-event-meta small, .pulse-amount small, .pulse-amount span,
+.activity-transfer small, .activity-value small, .activity-foot {
+  color: #a0a6b1;
+}
+.principles b, .notice b, .owner b, .receipt-head b,
+.privacy b, .pulse-feed-head > b, .pulse-event-copy b {
+  font-size: 12px;
+  line-height: 1.5;
+}
+.principles p, .owner small, .notice p { font-size: 12px; }
+.market h3 { font-size: 18px; line-height: 1.4; font-weight: 650; }
+.market .desc { font-size: 12px; }
+.facts b, .receipt-row, .receipt-row b { font-size: 12px; line-height: 1.6; }
+.section-head h2, .flow-intro h2, .settlement h2, .pulse-top h2 {
+  font-weight: 600;
+  letter-spacing: -.04em;
+  line-height: 1.12;
+}
+.search, .modal label, .modal input, .modal textarea { font-size: 13px; }
+.modal label { line-height: 1.5; }
+.modal input, .modal textarea { padding: 13px; }
+.pulse-event-copy span, .pulse-disclaimer, .pulse-control, .pulse-filters button {
+  font-size: 11px;
+  line-height: 1.6;
+}
+.pulse-event-meta b, .pulse-amount b, .activity-value b { font-size: 11px; }
+.pulse-event-meta small, .pulse-event-people { font-size: 10px; }
+.primary, .quiet { min-height: 40px; padding-inline: 15px; }
+input::placeholder, textarea::placeholder { color: #9298a3; opacity: 1; }
+:focus-visible { outline: 2px solid #e1e7f0; outline-offset: 3px; }
+@media (max-width: 700px) {
+  :root, body, button, input, textarea { font-size: 14px; }
+  .hero { padding-top: 48px; }
+  .hero h1 { font-size: clamp(2.8rem, 11.5vw, 4rem); line-height: 1.07; letter-spacing: -.04em; }
+  .hero > p, .flow-intro p, .section-head p, .settlement > div > p,
+  .notice p, .privacy p, .market .desc, .flow-step p, .modal > p {
+    font-size: 13px;
+    line-height: 1.75;
+  }
+  .eyebrow, .step-meta, .pulse-feature-head, .pulse-feature-foot,
+  .pulse-event-meta small, .pulse-amount small, .pulse-amount span,
+  .activity-transfer small, .activity-value small, .activity-foot,
+  .tag, .status, .facts small, .card-foot > span, .list-foot,
+  .receipt-head small, .receipt-head > span, .fine {
+    font-size: 9px;
+  }
+  .pulse-event-copy span, .pulse-disclaimer, .pulse-control, .pulse-filters button {
+    font-size: 10px;
+  }
+  .market h3 { font-size: 17px; }
+  .facts b, .receipt-row, .receipt-row b { font-size: 12px; }
+  .primary, .quiet { min-height: 42px; }
+}
+@media (prefers-contrast: more) {
+  :root { --muted: #c3c8d1; }
+  .hero > p, .flow-intro p, .section-head p, .settlement > div > p,
+  .notice p, .privacy p, .market .desc, .flow-step p, .modal > p,
+  .tag, .status, .facts small, .fine { color: #c0c5ce; }
+}
