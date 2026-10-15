@@ -10,7 +10,7 @@ This checklist deliberately separates frontend readiness from backend and chain 
 - [ ] All sample market and activity data is visibly labelled as demo/simulated.
 - [ ] Invalid form, loading, empty, expired and provider-error states are understandable.
 - [ ] No seed phrase, private key or service credential is ever requested or logged.
-- [ ] Explorer links are disabled until a documented explorer base URL is configured.
+- [ ] Explorer links are disabled until a documented explorer base URL is configured.\n- [ ] Market Pulse derives RFQ activity from market records; any transfer preview is explicitly simulated.\n- [ ] Manual refresh and database-error states are checked.
 
 ## Backend owner / integration gate
 - [ ] Supabase Auth sessions and email confirmation verified.
@@ -23,7 +23,7 @@ This checklist deliberately separates frontend readiness from backend and chain 
 - [ ] Wallet strategy and supported transparent/shielded flow documented.
 - [ ] Network identity is independently checked as testnet.
 - [ ] Test funds sourced through an official/community-supported testnet process.
-- [ ] Transaction submission tested with a wallet; no app-held seed phrase.
+- [ ] Transaction submission tested with a wallet; no app-held seed phrase.\n- [ ] Vercel server-side Zcash RPC variables configured; endpoint rejects mainnet and unconfigured nodes.\n- [ ] Transparent payment verifier tested against valid, mismatched, pending, nonexistent and wrong-network transactions.\n- [ ] Endpoint rate limiting and restricted node credentials are in place before public beta.
 - [ ] Confirmation verification checks expected payment conditions, not only txid existence.
 - [ ] Wrong-network, nonexistent txid, pending, failed, duplicate and reorg scenarios tested.
 - [ ] Transaction/provider logs do not expose sensitive user or shielded payment metadata.
