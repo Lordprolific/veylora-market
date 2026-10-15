@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, type FormEvent } from 'react'
 import { ArrowLeft, ArrowUpRight, CheckCircle2, CircleAlert, ExternalLink, ShieldCheck, TestTube2, Wifi, RefreshCw } from 'lucide-react'
 import { getZcashNetworkConfig, isTransactionIdFormat, looksLikeZcashAddress, transactionExplorerUrl } from './lib/zcash-testnet'
 import './testnet.css'
@@ -36,7 +36,7 @@ export default function TestnetGuide() {
 
   useEffect(() => { void checkNetwork() }, [])
 
-  const verifyTransaction = async (event: React.FormEvent<HTMLFormElement>) => {
+  const verifyTransaction = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (!validTxid || !recipient.trim() || !Number.isFinite(Number(amount)) || Number(amount) <= 0) return
     setCheckingTransaction(true)
