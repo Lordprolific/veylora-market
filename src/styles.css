@@ -334,3 +334,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
 footer .mark{width:25px;height:25px}
 .hero-core{display:grid;place-items:center}
 .hero-core img{width:42%;height:42%;object-fit:contain;filter:invert(1);opacity:.96}
+
+.market-tools{display:flex;align-items:center;gap:10px;min-width:0}
+.market-tools .search{min-width:160px}
+.refresh-markets{flex-shrink:0;white-space:nowrap;min-height:40px}
+.refresh-markets:disabled{opacity:.55;cursor:wait}
+.market .status{white-space:nowrap}
+@media(max-width:700px){.market-tools{width:100%;flex-wrap:wrap}.market-tools .search{flex:1 1 100%;width:100%}.refresh-markets{min-height:38px}}
