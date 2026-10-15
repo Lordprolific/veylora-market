@@ -11,7 +11,7 @@ function parseBody(body: unknown): { txid: string; recipient: string; amount: nu
   const amount = typeof value.amount === 'number' ? value.amount : Number(value.amount)
   const minConfirmations = value.minConfirmations === undefined ? 1 : Number(value.minConfirmations)
   if (!/^[0-9a-fA-F]{64}$/.test(txid)) return null
-  if (recipient.length < 26 || recipient.length > 100 || /\s/.test(recipient)) return null
+  if (!/^(tm|t2)[a-km-zA-HJ-NP-Z1-9]{25,40}$/.test(recipient)) return null
   if (!Number.isFinite(amount) || amount <= 0 || amount > 21000000) return null
   if (!Number.isInteger(minConfirmations) || minConfirmations < 1 || minConfirmations > 1000) return null
   return { txid, recipient, amount, minConfirmations }
