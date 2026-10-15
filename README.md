@@ -19,16 +19,16 @@ Never expose a Supabase service-role key in a browser bundle. Never put private 
 - Insert a bidder's offer under current row-level security policies.
 - Feedback UI and GitHub Issues link.
 - Settlement receipt distinguishes market outcome, payment submission, network confirmation and completion.
-- A separate Network Lab at /testnet.html for testnet readiness, basic address-shape checks and transaction-ID format checks.
+- A separate Network Lab at /testnet.html with a server-side testnet node health check and transparent-output transaction verification when a restricted Zcash testnet RPC node is configured.
 
 ## Testnet Network Lab
-See [docs/TESTNET-INTEGRATION.md](./docs/TESTNET-INTEGRATION.md) before configuring a public explorer. The Network Lab is a frontend utility only: it does not connect to a node, broadcast a transaction, or verify on-chain confirmation. VITE_ZCASH_NETWORK defaults to testnet. VITE_ZCASH_EXPLORER_BASE_URL is optional and should remain unset until a documented explorer URL format is confirmed.
+See [docs/TESTNET-INTEGRATION.md](./docs/TESTNET-INTEGRATION.md) for the verifier contract. The Vercel API checks `getblockchaininfo` and rejects any node not reporting `chain: test`; transaction checks compare a transparent output against an expected address, amount and confirmation threshold. Configure `ZCASH_RPC_URL`, `ZCASH_RPC_USER`, `ZCASH_RPC_PASSWORD`, and `ZCASH_NETWORK=testnet` as server-only Vercel variables. The verifier never broadcasts funds and does not verify shielded payment details. `VITE_ZCASH_EXPLORER_BASE_URL` is optional.
 
 ## Critical limits
 - Demo bids exist only in browser state and are not persistent.
-- Trusted market enforcement is incomplete. Move close-time enforcement, bid validation, winner selection, tie-breaks, rate limits and audit receipts into trusted server-side functions before any valuable trade.
+- Trusted market enforcement is incomplete. Close-time enforcement, bid validation, winner selection, tie-breaks, rate limits, idempotent settlement transitions and audit receipts must be server-enforced before any valuable trade.
 - The schema is a starting point and needs a security review; it does not itself provide complete bid immutability or robust concurrency controls.
-- No Zcash transaction is sent or verified by this app. Settlement preview is illustrative; a txid alone is not proof of confirmation.
+- The app can query a configured testnet node for transparent-output evidence; it does not send transactions, verify shielded payment details, or complete a trade. A txid alone is not proof of payment.
 - Shielded Zcash does not automatically hide app metadata or bids. The platform operator may access stored bid data. This is not operator-blind or zero-knowledge auction execution.
 - Do not use this beta for valuable trades.
 
