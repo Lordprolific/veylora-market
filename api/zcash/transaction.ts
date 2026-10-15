@@ -1,4 +1,4 @@
-import { allowRequest, clientKey, errorResponse, RpcOutput, RpcTransaction, sendJson, zcashRpc } from '../_lib/zcash-rpc'
+import { allowRequest, clientKey, errorResponse, RpcOutput, RpcTransaction, sendJson, zcashRpc } from '../../server/zcash-rpc'
 
 type Request = { method?: string; body?: unknown; headers?: Record<string, string | string[] | undefined> }
 type Response = { status: (code: number) => { json: (body: unknown) => unknown } }
