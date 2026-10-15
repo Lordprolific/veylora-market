@@ -11,7 +11,7 @@ create table public.markets (
   title text not null check (char_length(title) between 5 and 120),
   description text not null check (char_length(description) between 10 and 3000),
   quantity text not null check (char_length(quantity) between 1 and 120),
-  currency text not null default 'ZEC',
+  currency text not null default 'TAZ',
   closes_at timestamptz not null,
   tie_break_rule text not null default 'earliest_valid_bid' check (tie_break_rule = 'earliest_valid_bid'),
   status public.market_status not null default 'open',
