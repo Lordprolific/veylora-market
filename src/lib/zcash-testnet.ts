@@ -34,9 +34,9 @@ export function isTransactionIdFormat(value: string): boolean {
 /** Basic address-shape guard, not cryptographic or network validation. */
 export function looksLikeZcashAddress(value: string): boolean {
   const address = value.trim()
-  return /^(t1|t3)[a-km-zA-HJ-NP-Z1-9]{25,40}$/.test(address)
-    || /^(u|zs|ztestsapling)[a-zA-Z0-9]{20,120}$/.test(address)
-    || /^tm[a-km-zA-HJ-NP-Z1-9]{25,40}$/.test(address)
+  return /^(tm|t2)[a-km-zA-HJ-NP-Z1-9]{25,40}$/.test(address)
+    || /^ztestsapling1[a-z0-9]{20,120}$/.test(address)
+    || /^utest1[a-z0-9]{20,120}$/.test(address)
 }
 
 export function transactionExplorerUrl(config: ZcashNetworkConfig, txid: string): string | null {
