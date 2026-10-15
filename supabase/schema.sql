@@ -27,6 +27,65 @@ create table public.bids (
   bidder_id uuid not null references auth.users(id) on delete cascade,
   amount numeric(20, 8) not null check (amount > 0),
   note text check (note is null or char_length(note) <= 1000),
+  settlement_address text check (settlement_address is null or settlement_address ~ '^(tm|t2)[a-km-zA-HJ-NP-Z1-9]{25,40} timestamptz not null default now(),
+  unique (market_id, bidder_id)
+);
+
+alter table public.markets add constraint markets_winner_bid_fk
+  foreign key (winner_bid_id) references public.bids(id) on delete set null;
+
+create table public.settlements (
+  id uuid primary key default gen_random_uuid(),
+  market_id uuid not null unique references public.markets(id) on delete cascade,
+  status public.settlement_status not null default 'not_started',
+  network text not null default 'zcash-testnet',
+  txid text,
+  submitted_at timestamptz,
+  confirmed_at timestamptz,
+  evidence jsonb not null default '{}'::jsonb,
+  created_at timestamptz not null default now(),
+  constraint txid_format check (txid is null or txid ~ '^[0-9a-fA-F]{64}$')
+);
+
+create table public.feedback (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references auth.users(id) on delete set null,
+  category text not null check (category in ('bug', 'idea', 'other')),
+  message text not null check (char_length(message) between 5 and 3000),
+  created_at timestamptz not null default now()
+);
+
+alter table public.markets enable row level security;
+alter table public.bids enable row level security;
+alter table public.settlements enable row level security;
+alter table public.feedback enable row level security;
+
+-- Market discovery is public, but market edits belong to the creator.
+create policy "markets readable" on public.markets for select using (true);
+create policy "authenticated users create markets" on public.markets for insert to authenticated with check (auth.uid() = owner_id);
+-- No client-side UPDATE policy: market closure and awards must be written by trusted server-side logic.
+create policy "owners delete open markets" on public.markets for delete to authenticated using (auth.uid() = owner_id and status = 'open');
+
+-- Important: bid rows are intentionally NOT readable to other participants.
+create policy "bidder reads own bids" on public.bids for select to authenticated using (auth.uid() = bidder_id);
+create policy "authenticated bidder submits own bid" on public.bids for insert to authenticated with check (
+  auth.uid() = bidder_id
+  and exists (select 1 from public.markets m where m.id = market_id and m.status = 'open' and m.closes_at > now() and m.owner_id <> auth.uid())
+);
+create policy "bidder cannot edit committed bid" on public.bids for update using (false);
+create policy "bidder cannot delete committed bid" on public.bids for delete using (false);
+
+-- Settlement details are visible to market creator and winner only; confirmation should be server-verified.
+create policy "participants read settlement" on public.settlements for select to authenticated using (
+  exists (select 1 from public.markets m where m.id = market_id and (m.owner_id = auth.uid() or exists (select 1 from public.bids b where b.id = m.winner_bid_id and b.bidder_id = auth.uid())))
+);
+create policy "authenticated feedback insert" on public.feedback for insert to authenticated with check (auth.uid() = user_id);
+
+-- Beta warning:
+-- This schema is a starting point, not a complete security review. Client-side close/winner
+-- selection is not authoritative. Move bid validation, market closure, winner selection and
+-- settlement confirmation to trusted server-side functions before handling valuable trades.
+-- RLS policies cannot safely guarantee bid immutability or robust close-time concurrency by themselves.),
   committed_at timestamptz not null default now(),
   unique (market_id, bidder_id)
 );
