@@ -8,7 +8,7 @@ Early beta for private RFQs, sealed offers and clear settlement status, designed
 3. Configure email signup, site URL and redirect URLs in Supabase Auth.
 4. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY from Supabase in local .env.local and in a separate Vercel project connected to this repository.
 5. Run npm install, npm run dev, then npm run build.
-6. Deploy the beta/same-day-mvp branch to Vercel preview and smoke-test before sharing.
+6. Deploy the branch to a Vercel preview and smoke-test before sharing.
 
 Never expose a Supabase service-role key in a browser bundle. Never put private keys or wallet seed phrases in VITE_* variables.
 
@@ -19,6 +19,10 @@ Never expose a Supabase service-role key in a browser bundle. Never put private 
 - Insert a bidder's offer under current row-level security policies.
 - Feedback UI and GitHub Issues link.
 - Settlement receipt distinguishes market outcome, payment submission, network confirmation and completion.
+- A separate Network Lab at /testnet.html for testnet readiness, basic address-shape checks and transaction-ID format checks.
+
+## Testnet Network Lab
+See [docs/TESTNET-INTEGRATION.md](./docs/TESTNET-INTEGRATION.md) before configuring a public explorer. The Network Lab is a frontend utility only: it does not connect to a node, broadcast a transaction, or verify on-chain confirmation. VITE_ZCASH_NETWORK defaults to testnet. VITE_ZCASH_EXPLORER_BASE_URL is optional and should remain unset until a documented explorer URL format is confirmed.
 
 ## Critical limits
 - Demo bids exist only in browser state and are not persistent.
@@ -30,3 +34,6 @@ Never expose a Supabase service-role key in a browser bundle. Never put private 
 
 ## Tester checklist
 Use at least two separate accounts. Test signup, email confirmation, sign-in/out, RFQ creation, own-bid visibility, attempts to read another user's bid, duplicate/late offers, mobile layout and feedback. Do not advertise live bidding as fully enforced until trusted server-side controls are deployed.
+
+## Release checklist
+See [docs/RELEASE-CHECKLIST.md](./docs/RELEASE-CHECKLIST.md) for frontend, backend integration, testnet, privacy and launch gates.
