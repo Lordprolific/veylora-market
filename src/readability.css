@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 /* Readability system: legibility takes priority over decorative microtype. */
 :root {
-  --display: 'DM Sans', 'Inter', Arial, sans-serif;
+  --display: 'Geist', 'Inter', Arial, sans-serif;
   --body: 'Inter', Arial, sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, monospace;
   --muted: #a8adb7;
@@ -115,4 +115,59 @@ input::placeholder, textarea::placeholder { color: #9298a3; opacity: 1; }
   .hero > p, .flow-intro p, .section-head p, .settlement > div > p,
   .notice p, .privacy p, .market .desc, .flow-step p, .modal > p,
   .tag, .status, .facts small, .fine { color: #c0c5ce; }
+}
+
+
+/* Gloam-inspired typography: crisp neo-grotesk, stronger contrast, readable details. */
+:root { font-size: 15px; }
+body, button, input, textarea { font-size: 14px; }
+.hero > p, .flow-intro p, .section-head p, .settlement > div > p,
+.notice p, .privacy p, .market .desc, .flow-step p, .modal > p {
+  color: #c0c5ce;
+  font-size: 14px;
+  line-height: 1.75;
+}
+.brand small { font-size: 11px; color: #b6bbc5; }
+.eyebrow, .step-meta, .pulse-feature-head, .pulse-feature-foot,
+.pulse-event-meta small, .pulse-amount small, .pulse-amount span,
+.activity-transfer small, .activity-value small, .activity-foot,
+.tag, .status, .facts small, .card-foot > span, .list-foot,
+.receipt-head small, .receipt-head > span, .fine {
+  font-size: 11px;
+  line-height: 1.6;
+}
+.tag, .status, .facts small, .card-foot > span, .list-foot,
+.receipt-head small, .receipt-head > span, .fine,
+.pulse-event-meta small, .pulse-amount small, .pulse-amount span,
+.activity-transfer small, .activity-value small, .activity-foot {
+  color: #b2b8c2;
+}
+.principles b, .notice b, .owner b, .receipt-head b,
+.privacy b, .pulse-feed-head > b, .pulse-event-copy b {
+  font-size: 13px;
+}
+.principles p, .owner small, .notice p { font-size: 13px; }
+.market .desc { font-size: 13px; }
+.facts b, .receipt-row, .receipt-row b { font-size: 13px; }
+.search, .modal label, .modal input, .modal textarea { font-size: 14px; }
+.pulse-event-copy span, .pulse-disclaimer, .pulse-control, .pulse-filters button {
+  font-size: 12px;
+}
+.pulse-event-meta b, .pulse-amount b, .activity-value b { font-size: 12px; }
+.pulse-event-meta small, .pulse-event-people { font-size: 11px; }
+input::placeholder, textarea::placeholder { color: #aab0ba; opacity: 1; }
+@media (max-width: 700px) {
+  .eyebrow, .step-meta, .pulse-feature-head, .pulse-feature-foot,
+  .pulse-event-meta small, .pulse-amount small, .pulse-amount span,
+  .activity-transfer small, .activity-value small, .activity-foot,
+  .tag, .status, .facts small, .card-foot > span, .list-foot,
+  .receipt-head small, .receipt-head > span, .fine { font-size: 10px; }
+  .pulse-event-copy span, .pulse-disclaimer, .pulse-control, .pulse-filters button {
+    font-size: 11px;
+  }
+  .hero > p, .flow-intro p, .section-head p, .settlement > div > p,
+  .notice p, .privacy p, .market .desc, .flow-step p, .modal > p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
 }
