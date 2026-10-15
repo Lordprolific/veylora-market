@@ -6,6 +6,8 @@ The /testnet.html Network Lab now calls two same-origin Vercel serverless endpoi
 
 The beta frontend and server adapter are locked to testnet. Mainnet is deliberately unsupported. `VITE_ZCASH_EXPLORER_BASE_URL` is an optional public explorer base URL used to construct a `/tx/{txid}` link; leave it empty unless the chosen explorer documents that exact route.
 
+Testnet offers are denominated in **TAZ**, the testnet coin. Do not send real ZEC to a testnet address or treat TAZ as having monetary value.
+
 ## Important protocol distinction
 
 Zcash has transparent and shielded payment paths. The team must select and document which address types and payment flow the beta supports before implementing payment validation. Transparent-chain inspection cannot independently prove the amount and recipient of a shielded payment. Shielded payment verification may require a wallet/service architecture and evidence that the application can verify without exposing protected details.
