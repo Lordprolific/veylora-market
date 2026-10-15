@@ -25,22 +25,20 @@ The Zcash endpoints return a configuration error until all three RPC values are 
 
 The Network Lab transaction endpoint requires an expected transparent recipient and exact amount plus a confirmation threshold. The integrated settlement endpoint does not trust a client-supplied recipient or amount: it loads the winning offer's stored testnet recipient and amount, and requires three confirmations. It does not verify shielded outputs or recipient ownership. Node `getrawtransaction` availability depends on node transaction indexing/mempool visibility. The owner-facing settlement endpoint also stores evidence and moves a market to `settlement_confirmed` only after a matching transparent output reaches three confirmations. A separate owner acknowledgement endpoint then records `completed`. This is a transparent testnet-only flow, not a shielded-payment verifier; it still needs deployed configuration, integration tests, durable rate limits and a concurrency/security review.
 
-## Required implementation before real settlement
+## Remaining gates before real settlement
 
-1. Pick the supported wallet strategy and transaction flow. Do not implement seed-phrase collection in the website.
-2. Select a maintained testnet node/lightwallet service and document its availability, privacy, rate limits, authentication and network identity checks.
-3. Keep privileged RPC credentials and service credentials server-side. Never place secrets in VITE_* variables or the browser bundle.
-4. Implement a server-side adapter with explicit methods for network identity, transaction lookup, confirmation depth and payment-condition verification. The server must reject mainnet txids when the market expects testnet.
-5. Verify transaction ID, network, expected recipient/payment condition, amount when provable, confirmation count and reorg/rollback behaviour. Do not treat an explorer URL or a user-provided txid as proof.
-6. Make settlement state transitions idempotent and auditable. Separate submitted, pending, confirmed, failed and completed states.
-7. Test malformed txids, nonexistent transactions, wrong network, insufficient amount, wrong recipient, duplicate submissions, zero confirmations, reorgs, timeouts and provider errors.
-8. Document metadata leakage and avoid claiming operator-blind or end-to-end privacy without a reviewed threat model.
+1. Choose and document the wallet strategy and the transparent testnet flow used for this beta. Shielded settlement is not supported by this verifier.
+2. Configure a maintained testnet node with private RPC credentials and confirm the node reports testnet and has completed initial block download.
+3. Apply `supabase/migrations/20261015_settlement_recipient.sql` to an existing database. New sealed offers must store a valid transparent testnet recipient.
+4. Test award authorization, tie-breaking, concurrent award attempts, settlement retries, wrong recipient/amount, pending transactions, wrong network, reorgs, and node/provider failures.
+5. Add durable infrastructure-level rate limiting and monitoring. The in-memory throttle is only a best-effort guard and is not sufficient for public production.
+6. Review market state changes and settlement evidence with a security reviewer; document privacy metadata and incident response.
+7. Keep mainnet disabled and do not use this beta for valuable trades until the remaining gates pass.
 
 ## Public configuration
 
 Example local .env.local values (only after choosing a documented explorer):
 
-    VITE_ZCASH_NETWORK=testnet
     VITE_ZCASH_EXPLORER_BASE_URL=
 
 Leave the explorer URL empty until its exact transaction URL format has been verified. No private keys, RPC credentials, seed phrases or Supabase service-role keys belong in VITE_* variables.
