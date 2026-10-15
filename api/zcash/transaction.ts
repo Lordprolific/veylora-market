@@ -29,8 +29,8 @@ export default async function handler(req: Request, res: Response) {
   const input = parseBody(req.body)
   if (!input) return sendJson(res, 400, { ok: false, error: 'Provide a valid 64-character txid, transparent recipient address, positive amount, and confirmation threshold.' })
   try {
-    const info = await zcashRpc<{ chain?: string }>('getblockchaininfo')
-    if (info.chain !== 'test') return sendJson(res, 503, { ok: false, verified: false, error: 'Node network is not confirmed as Zcash testnet.' })
+    const info = await zcashRpc<{ chain?: string; initial_block_download_complete?: boolean }>('getblockchaininfo')
+    if (info.chain !== 'test' || info.initial_block_download_complete !== true) return sendJson(res, 503, { ok: false, verified: false, error: 'Node must identify as Zcash testnet and report initial block download complete.' })
     let tx: RpcTransaction
     try {
       tx = await zcashRpc<RpcTransaction>('getrawtransaction', [input.txid, 1])
