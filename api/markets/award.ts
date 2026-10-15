@@ -25,7 +25,7 @@ export default async function handler(req: Request, res: Response) {
     if (market.status !== 'open') return sendJson(res, 409, { ok: false, error: 'This market is no longer open.', status: market.status, winnerBidId: market.winner_bid_id })
     if (new Date(market.closes_at).getTime() > Date.now()) return sendJson(res, 409, { ok: false, error: 'The market deadline has not passed yet.' })
 
-    const bidsResult = await db.from('bids').select('id,amount,committed_at').eq('market_id', marketId).order('amount', { ascending: true }).order('committed_at', { ascending: true }).limit(1)
+    const bidsResult = await db.from('bids').select('id,amount,committed_at,settlement_address').eq('market_id', marketId).not('settlement_address', 'is', null).order('amount', { ascending: true }).order('committed_at', { ascending: true }).limit(1)
     if (bidsResult.error) throw new Error('Could not evaluate eligible offers.')
     const winner = bidsResult.data?.[0] ?? null
     const nextStatus = winner ? 'awarded' : 'closed'
