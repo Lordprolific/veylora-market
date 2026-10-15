@@ -131,3 +131,61 @@ footer{background:rgba(8,9,11,.75)}
 @media(max-width:420px){.activity-card{min-width:278px;grid-template-columns:28px minmax(125px,1fr) auto;padding:11px;gap:8px}.activity-transfer b{font-size:9px}.activity-value b{font-size:9px}.activity-foot{flex-direction:column;gap:6px}}
 @media(max-width:700px){header{height:auto;min-height:68px;flex-wrap:wrap;padding:12px 15px;row-gap:9px}.shell header nav{display:flex;order:3;width:100%;gap:5px;overflow-x:auto;scrollbar-width:none;padding-bottom:1px}.shell header nav::-webkit-scrollbar{display:none}.shell header nav button{flex-shrink:0;white-space:nowrap;padding:7px 10px;font-size:10px}.head-actions{margin-left:auto}.head-actions .primary{max-width:145px;white-space:nowrap}.hero{padding-top:64px}}
 @media(prefers-reduced-motion:reduce){.activity-track{animation:none!important}.activity-window{overflow-x:auto;mask-image:none}.activity-track-copy{display:none}}
+
+
+/* Interactive market pulse: product demonstration, not decorative ticker. */
+.exchange-pulse{position:relative;overflow:hidden;padding:clamp(44px,6vw,78px) clamp(20px,7vw,100px);border-top:1px solid rgba(202,211,225,.1);border-bottom:1px solid rgba(202,211,225,.1);background:radial-gradient(ellipse at 18% 0%,rgba(129,145,170,.1),transparent 44%),linear-gradient(180deg,#0c0d10,#090a0c)}
+.pulse-top{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;max-width:1400px;margin:0 auto 30px}
+.pulse-top h2{font:500 clamp(34px,4.2vw,54px)/1.02 var(--display);letter-spacing:-.065em;margin:15px 0 12px}
+.pulse-top h2 em{font-style:normal;color:#aeb8c8}
+.pulse-top p{max-width:410px;margin:0;color:#9297a1;font-size:12px;line-height:1.8}
+.pulse-controls{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:8px}
+.preview-pill{display:flex;align-items:center;gap:8px;white-space:nowrap;border:1px solid rgba(192,205,225,.18);padding:10px 12px;color:#b8c0cd;font:8px var(--mono);letter-spacing:.08em}
+.preview-pill i,.pulse-live-dot{width:6px;height:6px;border-radius:50%;background:#b7c8e3;box-shadow:0 0 12px rgba(183,200,227,.45)}
+.pulse-control{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:35px;padding:0 12px;background:#111317;border:1px solid #30343c;color:#cbd0da;font-size:10px;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.pulse-control:hover{background:#1b1e24;border-color:#5a6371;color:#fff}
+.pulse-action{background:#e8ebf0;border-color:#e8ebf0;color:#101114}
+.pulse-action:hover{background:#fff;border-color:#fff;color:#050505}
+.pulse-body{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:14px;max-width:1400px;margin:0 auto}
+.pulse-feature,.pulse-feed{min-width:0;border:1px solid rgba(190,202,222,.15);background:linear-gradient(145deg,rgba(20,22,27,.95),rgba(11,12,15,.96))}
+.pulse-feature{padding:20px 22px 0;display:flex;flex-direction:column;justify-content:space-between;min-height:255px}
+.pulse-feature-head{display:flex;align-items:center;gap:9px;color:#9ba3b1;font:8px var(--mono);letter-spacing:.1em}
+.pulse-count{margin-left:auto;color:#717987}
+.pulse-flow{display:grid;grid-template-columns:minmax(0,1fr) minmax(50px,.55fr) minmax(0,1fr) auto;align-items:center;gap:13px;padding:30px 0 25px}
+.pulse-node{display:flex;align-items:center;gap:10px;min-width:0}
+.pulse-avatar{display:grid;place-items:center;flex:0 0 36px;height:36px;border:1px solid #4c5667;background:linear-gradient(140deg,#303847,#15171c);color:#e1e6ee;font:10px var(--mono)}
+.pulse-avatar-to{border-color:#686d78;background:linear-gradient(140deg,#444955,#1a1b20)}
+.pulse-node>div{min-width:0;display:flex;flex-direction:column;gap:5px}
+.pulse-node small,.pulse-amount small{font:7px var(--mono);letter-spacing:.09em;color:#717987}
+.pulse-node b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#dfe3eb;font-size:10px;font-weight:500}
+.pulse-connector{height:1px;background:linear-gradient(90deg,#525c6b,#9ba9bd,#525c6b);position:relative;display:flex;justify-content:space-between;align-items:center}
+.pulse-connector>span:not(.pulse-packet){width:3px;height:3px;border-radius:50%;background:#c3cad6}
+.pulse-packet{position:absolute;left:0;top:-2px;width:5px;height:5px;border-radius:50%;background:#f4f6fa;box-shadow:0 0 12px 3px rgba(211,223,242,.4);animation:pulse-packet-move 2.4s ease-in-out infinite}
+.pulse-amount{display:flex;flex-direction:column;align-items:flex-end;gap:6px;min-width:76px}
+.pulse-amount b{font:500 12px var(--mono);color:#f0f2f6;animation:pulse-number-in .25s ease-out}
+.pulse-amount span{font:7px var(--mono);letter-spacing:.08em;color:#7e8795}
+.pulse-feature-foot{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-top:1px solid rgba(190,202,222,.1);font:7px var(--mono);letter-spacing:.08em;color:#707987}
+.pulse-feed-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 18px 14px;border-bottom:1px solid rgba(190,202,222,.1)}
+.pulse-feed-head>b{font-size:12px;font-weight:500;color:#e3e6ed}
+.pulse-filters{display:flex;gap:3px;padding:3px;background:#0b0c0f;border:1px solid rgba(190,202,222,.1)}
+.pulse-filters button{border:0;background:transparent;color:#858c98;padding:6px 8px;font-size:9px;cursor:pointer}
+.pulse-filters button.selected{background:#292d35;color:#f2f4f7}
+.pulse-list{padding:0 18px}
+.pulse-event{display:grid;grid-template-columns:30px minmax(0,1fr) auto;align-items:center;gap:11px;padding:14px 0;border-bottom:1px solid rgba(190,202,222,.08);animation:pulse-event-enter .3s ease-out}
+.pulse-event:last-child{border-bottom:0}
+.pulse-event-icon{display:grid;place-items:center;width:29px;height:29px;border:1px solid rgba(190,202,222,.16);color:#c2cad7;background:rgba(255,255,255,.025)}
+.pulse-event-icon.is-market{color:#aab5c7}
+.pulse-event-copy{display:flex;flex-direction:column;gap:5px;min-width:0}
+.pulse-event-copy b{font-size:10px;font-weight:500;color:#dce1e9}
+.pulse-event-copy span{font-size:9px;color:#838a96;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pulse-event-meta{display:flex;flex-direction:column;align-items:flex-end;gap:5px;min-width:70px}
+.pulse-event-meta b{font:9px var(--mono);color:#d2d8e2;white-space:nowrap}
+.pulse-event-meta small{font:8px var(--mono);color:#737b88}
+.pulse-empty{padding:30px 0;color:#858c98;font-size:11px}
+.pulse-disclaimer{max-width:1400px;margin:15px auto 0;color:#737b88;font:8px/1.7 var(--mono);letter-spacing:.035em}
+@keyframes pulse-packet-move{0%{left:0;opacity:.2}20%{opacity:1}80%{opacity:1}100%{left:calc(100% - 5px);opacity:.2}}
+@keyframes pulse-event-enter{from{opacity:.35;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse-number-in{from{opacity:.25;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:1000px){.pulse-top{align-items:flex-start;flex-direction:column}.pulse-controls{justify-content:flex-start}.pulse-body{grid-template-columns:1fr}.pulse-feature{min-height:225px}.pulse-flow{grid-template-columns:minmax(0,1fr) minmax(50px,.6fr) minmax(0,1fr) auto}}
+@media(max-width:600px){.exchange-pulse{padding:44px 16px}.pulse-top{gap:20px;margin-bottom:22px}.pulse-top h2{font-size:38px}.pulse-top p{font-size:11px}.pulse-controls{display:grid;grid-template-columns:1fr 1fr;width:100%}.preview-pill{grid-column:1/-1;width:max-content}.pulse-control{padding:0 9px;font-size:9px}.pulse-feature{padding:16px 14px 0;min-height:210px}.pulse-flow{grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr);gap:8px;padding:27px 0 22px}.pulse-node{gap:7px}.pulse-avatar{flex-basis:29px;height:29px;font-size:8px}.pulse-node b{font-size:9px}.pulse-amount{grid-column:1/-1;align-items:flex-start;flex-direction:row;justify-content:space-between;min-width:0;padding-top:8px;border-top:1px solid rgba(190,202,222,.08)}.pulse-amount b{font-size:11px}.pulse-amount span{align-self:center}.pulse-feature-foot{font-size:6px}.pulse-feed-head{padding:14px 12px 11px;align-items:flex-start;flex-direction:column}.pulse-filters{width:100%}.pulse-filters button{flex:1}.pulse-list{padding:0 12px}.pulse-event{grid-template-columns:28px minmax(0,1fr) auto;gap:8px;padding:12px 0}.pulse-event-icon{width:27px;height:27px}.pulse-event-copy b{font-size:9px}.pulse-event-copy span{font-size:8px;max-width:46vw}.pulse-event-meta{min-width:60px}.pulse-event-meta b{font-size:8px}.pulse-event-meta small{font-size:7px}.pulse-disclaimer{font-size:7px}}
+@media(prefers-reduced-motion:reduce){.pulse-packet,.pulse-event,.pulse-amount b{animation:none!important}.pulse-control,.pulse-filters button{transition:none!important}}
