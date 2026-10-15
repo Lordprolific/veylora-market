@@ -21,7 +21,7 @@ const cleanBaseUrl = (value?: string): string | null => {
 
 /** Public frontend configuration only. Never put RPC credentials or keys in VITE_* variables. */
 export function getZcashNetworkConfig(env: Record<string, string | undefined> = import.meta.env): ZcashNetworkConfig {
-  const network = env.VITE_ZCASH_NETWORK === 'mainnet' ? 'mainnet' : 'testnet'
+  const network = 'testnet'
   const explorerBaseUrl = cleanBaseUrl(env.VITE_ZCASH_EXPLORER_BASE_URL)
   return { network, displayName: network === 'testnet' ? 'Zcash Testnet' : 'Zcash Mainnet', currency: network === 'testnet' ? 'TAZ' : 'ZEC', explorerBaseUrl, configured: Boolean(explorerBaseUrl) }
 }
