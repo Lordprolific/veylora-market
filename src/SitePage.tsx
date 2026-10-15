@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowUpRight, CheckCircle2, CircleHelp, FileText, LockKeyhole, ShieldAlert, Sparkles } from 'lucide-react'
+import { ArrowLeft, ArrowUpRight, CheckCircle2, CircleHelp, FileText, LockKeyhole, Sparkles } from 'lucide-react'
 
 type Section = { heading: string; paragraphs?: string[]; bullets?: string[] }
 type Page = { eyebrow: string; title: string; lead: string; sections: Section[] }
