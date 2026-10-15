@@ -39,8 +39,8 @@ export default async function handler(req: Request, res: Response) {
     if (!bid || typeof bid.settlement_address !== 'string' || !/^(tm|t2)[a-km-zA-HJ-NP-Z1-9]{25,40}$/.test(bid.settlement_address)) {
       return sendJson(res, 409, { ok: false, error: 'The winning offer has no valid transparent Zcash testnet recipient. Existing offers need to be resubmitted with a testnet address before settlement.' })
     }
-    const info = await zcashRpc<{ chain?: string }>('getblockchaininfo')
-    if (info.chain !== 'test') return sendJson(res, 503, { ok: false, verified: false, error: 'Configured node did not identify itself as Zcash testnet.' })
+    const info = await zcashRpc<{ chain?: string; initial_block_download_complete?: boolean }>('getblockchaininfo')
+    if (info.chain !== 'test' || info.initial_block_download_complete !== true) return sendJson(res, 503, { ok: false, verified: false, error: 'Configured node must identify as Zcash testnet and report initial block download complete.' })
     let tx: RpcTransaction
     try {
       tx = await zcashRpc<RpcTransaction>('getrawtransaction', [txid, 1])
