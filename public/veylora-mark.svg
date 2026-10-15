@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>Veylora four-petal mark</title>
+  <g fill="currentColor">
+    <path d="M5.5 5.5C22.8 5.5 30.5 13.2 32 32C13.2 30.5 5.5 22.8 5.5 5.5Z"/>
+    <path d="M58.5 5.5C58.5 22.8 50.8 30.5 32 32C33.5 13.2 41.2 5.5 58.5 5.5Z"/>
+    <path d="M5.5 58.5C5.5 41.2 13.2 33.5 32 32C30.5 50.8 22.8 58.5 5.5 58.5Z"/>
+    <path d="M58.5 58.5C41.2 58.5 33.5 50.8 32 32C50.8 33.5 58.5 41.2 58.5 58.5Z"/>
+  </g>
+</svg>
