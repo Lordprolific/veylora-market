@@ -1,6 +1,6 @@
-import { BlockchainInfo, errorResponse, sendJson, zcashRpc } from '../_lib/zcash-rpc'
+import { allowRequest, BlockchainInfo, clientKey, errorResponse, sendJson, zcashRpc } from '../_lib/zcash-rpc'
 
-export default async function handler(req: { method?: string }, res: { status: (code: number) => { json: (body: unknown) => unknown } }) {
+export default async function handler(req: { method?: string; headers?: Record<string, string | string[] | undefined> }, res: { status: (code: number) => { json: (body: unknown) => unknown } }) {
   if (req.method !== 'GET') return sendJson(res, 405, { ok: false, error: 'Use GET.' })
   try {
     const info = await zcashRpc<BlockchainInfo>('getblockchaininfo')
