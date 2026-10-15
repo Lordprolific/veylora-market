@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type FormEvent } from 'react'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
-import { Activity, ArrowLeftRight, ArrowUpRight, BadgeCheck, Check, ChevronRight, Clock3, EyeOff, FileText, LockKeyhole, LogOut, Plus, Radio, ShieldCheck, Wallet, X } from 'lucide-react'
+import { Activity, ArrowLeftRight, ArrowUpRight, BadgeCheck, Check, ChevronRight, Clock3, EyeOff, FileText, LockKeyhole, LogOut, Plus, Radio, ShieldCheck, X } from 'lucide-react'
 import './styles.css'
 
 type Market = { id:string; title:string; description:string; quantity:string; closesAt:string; owner:string; demo:boolean; status:string; bids:number }
