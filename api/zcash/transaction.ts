@@ -25,7 +25,8 @@ function outputAddresses(output: RpcOutput): string[] {
 
 export default async function handler(req: Request, res: Response) {
   if (req.method !== 'POST') return sendJson(res, 405, { ok: false, error: 'Use POST.' })
-  if (!allowRequest(clientKey(req.headers), 12)) return sendJson(res, 429, { ok: false, verified: false, error: 'Too many verification attempts. Try again shortly.' })\n  const input = parseBody(req.body)
+  if (!allowRequest(clientKey(req.headers), 12)) return sendJson(res, 429, { ok: false, verified: false, error: 'Too many verification attempts. Try again shortly.' })
+  const input = parseBody(req.body)
   if (!input) return sendJson(res, 400, { ok: false, error: 'Provide a valid 64-character txid, transparent recipient address, positive amount, and confirmation threshold.' })
   try {
     const info = await zcashRpc<{ chain?: string }>('getblockchaininfo')
