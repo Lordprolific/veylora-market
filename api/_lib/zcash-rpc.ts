@@ -14,7 +14,31 @@ export type RpcTransaction = {
 export type BlockchainInfo = { chain?: string; blocks?: number; headers?: number; initial_block_download_complete?: boolean }
 
 export class RpcConfigurationError extends Error {}
-export class RpcRequestError extends Error {}\n\nconst requestBuckets = new Map<string, { startedAt: number; count: number }>()\n\n/** Best-effort per-instance throttle; deploy a durable edge/API rate limit before public beta. */\nexport function allowRequest(key: string, limit = 20, windowMs = 60_000): boolean {\n  const now = Date.now()\n  const current = requestBuckets.get(key)\n  if (!current || now - current.startedAt >= windowMs) {\n    requestBuckets.set(key, { startedAt: now, count: 1 })\n    if (requestBuckets.size > 1000) {\n      for (const [bucketKey, bucket] of requestBuckets) if (now - bucket.startedAt >= windowMs) requestBuckets.delete(bucketKey)\n    }\n    return true\n  }\n  if (current.count >= limit) return false\n  current.count += 1\n  return true\n}\n\nexport function clientKey(headers?: Record<string, string | string[] | undefined>): string {\n  const forwarded = headers?.['x-forwarded-for']\n  const value = Array.isArray(forwarded) ? forwarded[0] : forwarded\n  return (value?.split(',')[0]?.trim() || 'unknown').slice(0, 80)\n}
+export class RpcRequestError extends Error {}
+
+const requestBuckets = new Map<string, { startedAt: number; count: number }>()
+
+/** Best-effort per-instance throttle; deploy a durable edge/API rate limit before public beta. */
+export function allowRequest(key: string, limit = 20, windowMs = 60_000): boolean {
+  const now = Date.now()
+  const current = requestBuckets.get(key)
+  if (!current || now - current.startedAt >= windowMs) {
+    requestBuckets.set(key, { startedAt: now, count: 1 })
+    if (requestBuckets.size > 1000) {
+      for (const [bucketKey, bucket] of requestBuckets) if (now - bucket.startedAt >= windowMs) requestBuckets.delete(bucketKey)
+    }
+    return true
+  }
+  if (current.count >= limit) return false
+  current.count += 1
+  return true
+}
+
+export function clientKey(headers?: Record<string, string | string[] | undefined>): string {
+  const forwarded = headers?.['x-forwarded-for']
+  const value = Array.isArray(forwarded) ? forwarded[0] : forwarded
+  return (value?.split(',')[0]?.trim() || 'unknown').slice(0, 80)
+}
 
 function config() {
   const url = process.env.ZCASH_RPC_URL
