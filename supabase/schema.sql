@@ -63,7 +63,7 @@ alter table public.feedback enable row level security;
 -- Market discovery is public, but market edits belong to the creator.
 create policy "markets readable" on public.markets for select using (true);
 create policy "authenticated users create markets" on public.markets for insert to authenticated with check (auth.uid() = owner_id);
-create policy "owners update markets" on public.markets for update to authenticated using (auth.uid() = owner_id) with check (auth.uid() = owner_id);
+-- No client-side UPDATE policy: market closure and awards must be written by trusted server-side logic.
 create policy "owners delete open markets" on public.markets for delete to authenticated using (auth.uid() = owner_id and status = 'open');
 
 -- Important: bid rows are intentionally NOT readable to other participants.
