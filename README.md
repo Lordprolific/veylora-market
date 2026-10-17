@@ -26,6 +26,7 @@ See [docs/TESTNET-INTEGRATION.md](./docs/TESTNET-INTEGRATION.md) for the verifie
 
 ## Critical limits
 - Demo bids exist only in browser state and are not persistent.
+- Wallet-first sign-in currently uses Supabase anonymous sessions, which are browser/device-local. Account recovery or cross-device restoration is not implemented; do not clear site data for test accounts.
 - The server-side close-and-award and testnet settlement endpoints are scaffolded, but require server-only Supabase service-role and restricted testnet RPC configuration plus integration testing. Durable rate limiting, atomic database transactions and a reviewed audit trail remain required before any valuable trade.
 - The schema is a starting point and needs a security review; it does not itself provide complete bid immutability or robust concurrency controls.
 - The app can query a configured testnet node for transparent-output evidence, and the owner can record completion only after three-confirmation verification. It does not send transactions or verify shielded payment details. A txid alone is not proof of payment.
