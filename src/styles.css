@@ -103,6 +103,27 @@ footer{background:rgba(8,9,11,.75)}
 @media(max-width:700px){.hero{min-height:480px;padding-top:66px}.hero-art{width:75vw;right:-28vw;top:47%;opacity:.27}.hero h1{font-size:clamp(54px,15vw,72px)}.hero>p{max-width:88%;position:relative}.hero-note{display:none}.flow-section{grid-template-columns:1fr;padding:52px 20px;gap:25px}.flow-intro h2{font-size:39px}.flow-steps{grid-template-columns:1fr;gap:9px}.flow-step{min-height:0;padding:17px;display:grid;grid-template-columns:32px 42px 1fr;align-items:center;column-gap:10px}.step-index{grid-row:1 / span 2;align-self:start;padding-top:4px}.step-icon{grid-column:2;grid-row:1 / span 2;margin:0}.flow-step h3{grid-column:3;margin:0 0 4px}.flow-step p{grid-column:3;margin:0 0 8px}.step-meta{grid-column:3}.art-caption{font-size:6px}}
 @media(prefers-reduced-motion:reduce){.hero-art *,.hero-art:before{animation:none!important}}
 
+/* True 3D hero: rings sit in real depth, the stage tilts with the pointer. */
+.hero-art{perspective:1200px;pointer-events:auto}
+.hero-stage{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(var(--tx,0deg)) rotateY(var(--ty,0deg));transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.hero-art .hero-orbit{transform-style:preserve-3d}
+.hero-art .orbit-one{--tilt:72deg;--yaw:0deg;transform:rotateX(var(--tilt)) rotateY(var(--yaw));animation:vey-orbit-3d 19s linear infinite}
+.hero-art .orbit-two{--tilt:62deg;--yaw:38deg;transform:rotateX(var(--tilt)) rotateY(var(--yaw));animation:vey-orbit-3d 26s linear infinite reverse}
+.hero-art .orbit-three{--tilt:80deg;--yaw:-30deg;transform:rotateX(var(--tilt)) rotateY(var(--yaw));animation:vey-orbit-3d 42s linear infinite}
+.hero-core{translate:0 0 70px}
+.orbit-node{translate:0 0 40px}
+@keyframes vey-orbit-3d{from{transform:rotateX(var(--tilt)) rotateY(var(--yaw)) rotateZ(0deg)}to{transform:rotateX(var(--tilt)) rotateY(var(--yaw)) rotateZ(360deg)}}
+
+.transfer-chip{position:absolute;left:4%;bottom:14%;translate:0 0 90px;display:inline-flex;align-items:center;gap:9px;padding:8px 12px 8px 8px;border:1px solid rgba(190,202,222,.22);background:rgba(12,13,16,.72);backdrop-filter:blur(10px);font:9px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#dfe5ef;box-shadow:0 18px 40px #0008;white-space:nowrap}
+
+/* Transfer icon system: one size, one stroke, one palette. */
+.transfer-icon{display:inline-grid;place-items:center;width:26px;height:26px;flex-shrink:0;color:#dce2ec;border:1px solid rgba(196,208,228,.22);background:linear-gradient(145deg,rgba(226,232,242,.1),rgba(226,232,242,.02))}
+.transfer-chip .transfer-icon{width:22px;height:22px;border:0;background:rgba(223,229,239,.12)}
+.transfer-out{color:#e9d9c9}
+.transfer-in{color:#cfe3d6}
+.transfer-swap{color:#dce2ec}
+@media(max-width:700px){.hero-art{pointer-events:none}.transfer-chip{display:none}}
+
 
 /* Wallet activity preview: a restrained, explicitly illustrative motion strip. */
 .activity-preview{position:relative;overflow:hidden;padding:66px clamp(20px,7vw,100px) 24px;border-bottom:1px solid rgba(205,214,228,.11);background:radial-gradient(ellipse at 50% 0%,rgba(119,135,159,.09),transparent 55%),#0a0b0d}
