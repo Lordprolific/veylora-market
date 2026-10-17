@@ -2,7 +2,7 @@
 
 ## Current state
 
-The /testnet.html Network Lab now calls two same-origin Vercel serverless endpoints. `/api/zcash/network` requests `getblockchaininfo` and only reports connected when the node returns `chain: test`. `/api/zcash/transaction` checks a txid with `getrawtransaction` and compares a requested transparent output against the expected recipient, amount and minimum confirmation depth. These endpoints do not broadcast transactions, collect keys, award markets, or mark trades complete. A matching transparent output is not a shielded-payment verifier.
+The /testnet.html Network Lab calls two same-origin Vercel serverless endpoints. `/api/zcash/network` requests `getblockchaininfo` and only reports the node identity as testnet when the node returns `chain: test`. It reports synchronization only when the node explicitly exposes a supported initial-block-download flag. `/api/zcash/transaction` checks a txid with `getrawtransaction` and compares a requested transparent output against the expected recipient, amount and minimum confirmation depth. These endpoints do not broadcast transactions, collect keys, award markets, or mark trades complete. A matching transparent output is not a shielded-payment verifier.
 
 The beta frontend and server adapter are locked to testnet. Mainnet is deliberately unsupported. `VITE_ZCASH_EXPLORER_BASE_URL` is an optional public explorer base URL used to construct a `/tx/{txid}` link; leave it empty unless the chosen explorer documents that exact route.
 
@@ -20,17 +20,16 @@ Set these in Vercel server environment variables only (not `VITE_*`):
 - `SUPABASE_URL` (or the existing `VITE_SUPABASE_URL`)
 - `SUPABASE_SERVICE_ROLE_KEY` (used only by server-side award and settlement endpoints)
 - `ZCASH_RPC_URL` (HTTPS for remote hosts; localhost is allowed for local development)
-- `ZCASH_RPC_USER`
-- `ZCASH_RPC_PASSWORD`
+- Either `ZCASH_RPC_API_KEY` (sent in the `x-api-key` header) **or both** `ZCASH_RPC_USER` and `ZCASH_RPC_PASSWORD` (HTTP Basic authentication)
 
-The Zcash endpoints return a configuration error until all three RPC values are set. The market award and settlement endpoints also require the server-only Supabase service-role key. Use a dedicated, restricted testnet node account. Do not expose its credentials in browser variables. Node RPC access should be protected by infrastructure-level rate limiting before public beta; the app endpoint must not be treated as a public general-purpose RPC proxy.
+The Zcash endpoints return a configuration error until the RPC URL and one supported authentication method are set. The market award and settlement endpoints also require the server-only Supabase service-role key. Use a dedicated, restricted testnet node account. Do not expose credentials in browser variables. Node RPC access should be protected by infrastructure-level rate limiting before public beta; the app endpoint must not be treated as a public general-purpose RPC proxy.
 
 The Network Lab transaction endpoint requires an expected transparent recipient and exact amount plus a confirmation threshold. The integrated settlement endpoint does not trust a client-supplied recipient or amount: it loads the winning offer's stored testnet recipient and amount, and requires three confirmations. It does not verify shielded outputs or recipient ownership. Node `getrawtransaction` availability depends on node transaction indexing/mempool visibility. The owner-facing settlement endpoint also stores evidence and moves a market to `settlement_confirmed` only after a matching transparent output reaches three confirmations. A separate owner acknowledgement endpoint then records `completed`. This is a transparent testnet-only flow, not a shielded-payment verifier; it still needs deployed configuration, integration tests, durable rate limits and a concurrency/security review.
 
 ## Remaining gates before real settlement
 
 1. Choose and document the wallet strategy and the transparent testnet flow used for this beta. Shielded settlement is not supported by this verifier.
-2. Configure a maintained testnet node with private RPC credentials and confirm the node reports testnet and has completed initial block download.
+2. Configure a maintained testnet node with private RPC credentials and confirm the node reports testnet and explicitly reports that initial block download is complete.
 3. Apply `supabase/migrations/20261015_settlement_recipient.sql` to an existing database. New sealed offers must store a valid transparent testnet recipient.
 4. Test award authorization, tie-breaking, concurrent award attempts, settlement retries, wrong recipient/amount, pending transactions, wrong network, reorgs, and node/provider failures.
 5. Add durable infrastructure-level rate limiting and monitoring. The in-memory throttle is only a best-effort guard and is not sufficient for public production.
@@ -39,7 +38,7 @@ The Network Lab transaction endpoint requires an expected transparent recipient 
 
 ## Public configuration
 
-Example local .env.local values (only after choosing a documented explorer):
+Example local .env.local value (only after choosing a documented explorer):
 
     VITE_ZCASH_EXPLORER_BASE_URL=
 
