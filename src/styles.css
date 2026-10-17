@@ -597,3 +597,29 @@ footer .mark{width:25px;height:25px}
 .flow-step::after{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(ellipse at 90% 0%,rgba(189,207,234,.08),transparent 58%);pointer-events:none}
 @media(max-width:700px){.pulse-avatar{width:40px;height:40px}.pulse-mini-avatar{width:24px;height:24px}}
 @media(prefers-reduced-motion:reduce){.pulse-connector .pulse-packet,.pulse-feature::after{animation:none!important}}
+
+/* VEYLORA / kinetic silver orbital atmosphere */
+.shell{position:relative;isolation:isolate;overflow:clip}
+.shell::before{content:"";position:absolute;z-index:-2;inset:0 0 auto;height:min(1100px,115vh);pointer-events:none;background:radial-gradient(ellipse at 76% 10%,rgba(163,183,213,.105),transparent 30%),radial-gradient(ellipse at 12% 30%,rgba(128,144,170,.07),transparent 27%),linear-gradient(180deg,rgba(255,255,255,.018),transparent 52%)}
+.hero{position:relative;isolation:isolate}
+.hero::before,.hero::after{content:"";position:absolute;pointer-events:none;z-index:-1;left:48%;top:48%;width:min(68vw,780px);aspect-ratio:1;border:1px solid rgba(191,207,231,.13);border-radius:50%;transform:translate(-50%,-50%) rotateX(67deg) rotateZ(-18deg);box-shadow:0 0 70px rgba(156,181,220,.035),inset 0 0 65px rgba(156,181,220,.025);animation:vey-orbit-drift 26s linear infinite}
+.hero::after{width:min(56vw,640px);border-color:rgba(223,231,244,.1);transform:translate(-50%,-50%) rotateX(68deg) rotateZ(36deg);animation:vey-orbit-reverse 32s linear infinite}
+.hero-art{perspective:1100px;transform-style:preserve-3d}
+.hero-orbit{transform-style:preserve-3d;filter:drop-shadow(0 0 10px rgba(184,205,235,.08));animation:vey-orbit-breathe 7s ease-in-out infinite}
+.hero-orbit.orbit-two{animation-duration:10s;animation-direction:reverse}
+.hero-orbit.orbit-three{animation-duration:13s}
+.hero-core{transform:translateZ(24px);box-shadow:0 0 50px rgba(176,196,227,.12),inset 0 0 25px rgba(255,255,255,.06);animation:vey-core-float 6s ease-in-out infinite}
+.orbit-node{box-shadow:0 0 20px rgba(202,218,242,.25);animation:vey-node-float 5s ease-in-out infinite}
+.node-two{animation-delay:-1.8s}.node-three{animation-delay:-3.1s}
+.hero h1 em,.pulse-top h2 em,.flow-intro h2 em,.settlement h2 em{text-shadow:0 0 42px rgba(190,208,238,.13)}
+.primary,.quiet,.text-btn,.pulse-control,.market,.flow-step,.receipt{transition:transform .25s ease,border-color .25s ease,background .25s ease,box-shadow .25s ease}
+.primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.24),0 0 20px rgba(190,208,238,.09)}
+.market:hover{border-color:rgba(196,211,234,.3);box-shadow:0 18px 44px rgba(0,0,0,.18);transform:translateY(-3px)}
+.receipt:hover{border-color:rgba(196,211,234,.24);transform:translateY(-2px)}
+@keyframes vey-orbit-drift{from{rotate:0deg}to{rotate:360deg}}
+@keyframes vey-orbit-reverse{from{rotate:360deg}to{rotate:0deg}}
+@keyframes vey-orbit-breathe{0%,100%{opacity:.75;scale:1}50%{opacity:1;scale:1.035}}
+@keyframes vey-core-float{0%,100%{transform:translateY(0) translateZ(24px)}50%{transform:translateY(-7px) translateZ(32px)}}
+@keyframes vey-node-float{0%,100%{translate:0 0}50%{translate:0 -6px}}
+@media(max-width:700px){.hero::before{left:50%;top:42%;width:100vw}.hero::after{left:50%;top:42%;width:84vw}.hero-art{max-width:100%}}
+@media(prefers-reduced-motion:reduce){.hero::before,.hero::after,.hero-orbit,.hero-core,.orbit-node{animation:none!important}}
