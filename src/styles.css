@@ -542,3 +542,30 @@ footer .mark{width:25px;height:25px}
 .pulse-feature:hover { border-color:rgba(198,211,232,.28); box-shadow:0 16px 46px rgba(0,0,0,.16); }
 @keyframes vey-event-arrive { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
 @media (prefers-reduced-motion: reduce) { .pulse-event { animation:none !important; } }
+
+
+/* Wallet identities + activity motion: additive polish over the existing Veylora layout. */
+.pulse-avatar{display:grid;place-items:center;flex:0 0 auto;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.pulse-avatar svg{color:#dbe2ed;stroke-width:1.65}
+.pulse-avatar-to{background:linear-gradient(145deg,#252b35,#111318);border-color:rgba(193,209,232,.34)}
+.pulse-node:hover .pulse-avatar{transform:translateY(-2px);box-shadow:0 0 18px rgba(190,207,234,.12)}
+.pulse-event-people{display:flex;align-items:center;gap:6px;min-width:62px;color:#8e97a7}
+.pulse-mini-avatar{width:27px;height:27px;display:grid;place-items:center;border:1px solid rgba(194,209,231,.25);border-radius:50%;background:linear-gradient(145deg,#292e38,#121419);color:#dce3ee;box-shadow:inset 0 1px rgba(255,255,255,.045)}
+.pulse-mini-avatar svg{width:13px;height:13px;stroke-width:1.65}
+.pulse-mini-avatar.receiving{background:linear-gradient(145deg,#202a2b,#111617);border-color:rgba(166,204,198,.28);color:#c4e1db}
+.pulse-transfer-arrow{font-size:12px;color:#7f8999}
+.pulse-event{animation:vey-event-arrive .42s cubic-bezier(.2,.8,.2,1) both}
+.pulse-event:nth-child(2){animation-delay:35ms}.pulse-event:nth-child(3){animation-delay:70ms}.pulse-event:nth-child(4){animation-delay:105ms}
+.pulse-connector .pulse-packet{box-shadow:0 0 13px rgba(204,218,241,.68)}
+.pulse-feature{transition:border-color .25s ease,box-shadow .25s ease}
+.pulse-feature:hover{border-color:rgba(198,211,232,.28);box-shadow:0 16px 46px rgba(0,0,0,.16)}
+.flow-section{align-items:stretch;gap:clamp(28px,5vw,72px)}
+.flow-intro{align-self:start}
+.flow-steps{align-items:stretch}
+.flow-step{height:100%;display:flex;flex-direction:column;min-height:235px}
+.flow-step p{flex:1}
+.flow-step .step-meta{margin-top:22px;line-height:1.5}
+@keyframes vey-event-arrive{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:900px){.flow-section{grid-template-columns:1fr;gap:28px}.flow-intro{max-width:560px}.flow-steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}}
+@media(max-width:700px){.flow-section{padding:48px 18px}.flow-steps{grid-template-columns:1fr;gap:12px}.flow-step{min-height:0}.flow-step .step-meta{margin-top:15px}.pulse-mini-avatar{width:24px;height:24px}}
+@media(prefers-reduced-motion:reduce){.pulse-event{animation:none!important}}
