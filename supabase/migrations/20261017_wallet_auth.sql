@@ -19,7 +19,9 @@ create table if not exists public.wallet_identities (
 
 alter table public.wallet_auth_challenges enable row level security;
 alter table public.wallet_identities enable row level security;
--- No client policies: only trusted server endpoints using the service role may read or write these tables.
+-- A user may read only their own verified identity. The service role handles challenge verification and writes.
+create policy "users read own wallet identity" on public.wallet_identities for select to authenticated using (user_id = auth.uid());
+-- No client policies on wallet_auth_challenges.
 
 drop policy if exists "authenticated users create markets" on public.markets;
 create policy "wallet-verified users create markets" on public.markets for insert to authenticated
