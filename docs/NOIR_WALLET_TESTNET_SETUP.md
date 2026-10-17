@@ -19,7 +19,7 @@ Do not send real ZEC to testnet addresses. Do not enter a recovery phrase, priva
 4. The server verifies the signature and consumes the challenge. A wallet identity is linked to that Veylora session only after verification.
 5. The app checks the server-side wallet identity record when restoring a session. Editable Supabase user metadata is not used to authorize market actions.
 
-If anonymous Supabase sign-ins are disabled, enable **Authentication → Sign In / Providers → Anonymous Sign-Ins** for the Veylora Supabase project, or sign in with an existing Veylora account and then connect Noir Wallet. The wallet signature is still required for live market actions.
+Wallet-first sign-in requires **Authentication → Sign In / Providers → Anonymous Sign-Ins** to be enabled in the Veylora Supabase project. The wallet signature is still required for live market actions.
 
 To revoke access later, use Noir Wallet's connected-sites controls or Veylora's disconnect action. Never share your recovery phrase, private keys, or wallet password.
 
