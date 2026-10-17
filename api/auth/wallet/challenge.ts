@@ -26,6 +26,8 @@ export default async function handler(req: Request, res: Response) {
     }
     const db = serviceClient()
     const user = await authenticatedUser(db, token)
+    // Opportunistically remove expired challenges to prevent stale rows accumulating.
+    await db.from('wallet_auth_challenges').delete().lt('expires_at', new Date().toISOString())
     const nonce = randomBytes(32).toString('hex')
     const id = randomBytes(16).toString('hex')
     const message = [
