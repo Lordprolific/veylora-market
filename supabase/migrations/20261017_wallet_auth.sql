@@ -22,6 +22,9 @@ alter table public.wallet_identities enable row level security;
 -- A user may read only their own verified identity. The service role handles challenge verification and writes.
 create policy "users read own wallet identity" on public.wallet_identities for select to authenticated using (user_id = auth.uid());
 -- No client policies on wallet_auth_challenges.
+grant all on public.wallet_auth_challenges to service_role;
+grant all on public.wallet_identities to service_role;
+grant select on public.wallet_identities to authenticated;
 
 drop policy if exists "authenticated users create markets" on public.markets;
 create policy "wallet-verified users create markets" on public.markets for insert to authenticated
