@@ -11,7 +11,7 @@ create table public.markets (
   title text not null check (char_length(title) between 5 and 120),
   description text not null check (char_length(description) between 10 and 3000),
   quantity text not null check (char_length(quantity) between 1 and 120),
-  currency text not null default 'ZEC',
+  currency text not null default 'TAZ',
   closes_at timestamptz not null,
   tie_break_rule text not null default 'earliest_valid_bid' check (tie_break_rule = 'earliest_valid_bid'),
   status public.market_status not null default 'open',
@@ -27,6 +27,7 @@ create table public.bids (
   bidder_id uuid not null references auth.users(id) on delete cascade,
   amount numeric(20, 8) not null check (amount > 0),
   note text check (note is null or char_length(note) <= 1000),
+  settlement_address text check (settlement_address is null or settlement_address ~ '^(tm|t2)[a-km-zA-HJ-NP-Z1-9]{25,40}$'),
   committed_at timestamptz not null default now(),
   unique (market_id, bidder_id)
 );
@@ -82,7 +83,7 @@ create policy "participants read settlement" on public.settlements for select to
 create policy "authenticated feedback insert" on public.feedback for insert to authenticated with check (auth.uid() = user_id);
 
 -- Beta warning:
--- This schema is a starting point, not a complete security review. Client-side close/winner
--- selection is not authoritative. Move bid validation, market closure, winner selection and
--- settlement confirmation to trusted server-side functions before handling valuable trades.
--- RLS policies cannot safely guarantee bid immutability or robust close-time concurrency by themselves.
+-- This schema is a starting point and needs a security review. The trusted award and
+-- settlement endpoints are implemented in api/, but still require server configuration,
+-- concurrency testing and durable rate limiting before handling valuable trades.
+-- RLS policies alone do not guarantee bid immutability or robust close-time concurrency.
