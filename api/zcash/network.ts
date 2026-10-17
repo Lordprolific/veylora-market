@@ -6,13 +6,14 @@ export default async function handler(req: { method?: string; headers?: Record<s
   try {
     const info = await zcashRpc<BlockchainInfo>('getblockchaininfo')
     if (info.chain !== 'test') return sendJson(res, 503, { ok: false, network: info.chain ?? 'unknown', error: 'Configured node did not identify itself as Zcash testnet. Verification is disabled.' })
+    const synced = info.initial_block_download_complete === true || info.initialblockdownload === false
     return sendJson(res, 200, {
       ok: true,
       network: 'testnet',
       chain: info.chain,
       blocks: typeof info.blocks === 'number' ? info.blocks : null,
       headers: typeof info.headers === 'number' ? info.headers : null,
-      synced: info.initial_block_download_complete === true,
+      synced,
       checkedAt: new Date().toISOString(),
     })
   } catch (error) {
