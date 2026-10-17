@@ -29,8 +29,9 @@ export default async function handler(req: Request, res: Response) {
   const input = parseBody(req.body)
   if (!input) return sendJson(res, 400, { ok: false, error: 'Provide a valid 64-character txid, transparent recipient address, positive amount, and confirmation threshold.' })
   try {
-    const info = await zcashRpc<{ chain?: string; initial_block_download_complete?: boolean }>('getblockchaininfo')
-    if (info.chain !== 'test' || info.initial_block_download_complete !== true) return sendJson(res, 503, { ok: false, verified: false, error: 'Node must identify as Zcash testnet and report initial block download complete.' })
+    const info = await zcashRpc<BlockchainInfoLike>('getblockchaininfo')
+    const synced = info.initial_block_download_complete === true || info.initialblockdownload === false
+    if (info.chain !== 'test' || !synced) return sendJson(res, 503, { ok: false, verified: false, error: 'Node must identify as Zcash testnet and explicitly report that initial block download is complete.' })
     let tx: RpcTransaction
     try {
       tx = await zcashRpc<RpcTransaction>('getrawtransaction', [input.txid, 1])
@@ -71,4 +72,10 @@ export default async function handler(req: Request, res: Response) {
     const result = errorResponse(error)
     return sendJson(res, result.status, { ok: false, verified: false, network: 'testnet', error: result.message })
   }
+}
+
+type BlockchainInfoLike = {
+  chain?: string
+  initial_block_download_complete?: boolean
+  initialblockdownload?: boolean
 }
