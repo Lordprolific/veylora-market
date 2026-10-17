@@ -623,3 +623,104 @@ footer .mark{width:25px;height:25px}
 @keyframes vey-node-float{0%,100%{translate:0 0}50%{translate:0 -6px}}
 @media(max-width:700px){.hero::before{left:50%;top:42%;width:100vw}.hero::after{left:50%;top:42%;width:84vw}.hero-art{max-width:100%}}
 @media(prefers-reduced-motion:reduce){.hero::before,.hero::after,.hero-orbit,.hero-core,.orbit-node{animation:none!important}}
+
+
+/* Final responsive repair: footer layout and exchange-feed collision fixes */
+.exchange-pulse,.pulse-body,.pulse-feature,.pulse-feed,.pulse-list{min-width:0}
+.pulse-body{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:stretch;gap:18px}
+.pulse-feature{min-width:0}
+.pulse-flow{display:grid;grid-template-columns:minmax(0,1fr) minmax(34px,.45fr) minmax(0,1fr);align-items:center;gap:10px}
+.pulse-node{display:flex;align-items:center;gap:10px;min-width:0}
+.pulse-node>div{min-width:0;display:flex;flex-direction:column;gap:4px}
+.pulse-node b,.pulse-event-copy b,.pulse-event-copy span,.pulse-event-meta b,.pulse-event-meta small{overflow-wrap:anywhere;word-break:normal}
+.pulse-node b{font-size:clamp(10px,.9vw,13px);line-height:1.35}
+.pulse-node small,.pulse-amount small{font-size:8px;letter-spacing:.12em}
+.pulse-avatar{flex:0 0 42px;width:42px;height:42px}
+.pulse-connector{min-width:28px;display:flex;justify-content:space-evenly;align-items:center;gap:5px}
+.pulse-amount{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(218,226,240,.1);min-width:0}
+.pulse-amount b{font-size:clamp(15px,1.4vw,21px);line-height:1.3;overflow-wrap:anywhere}
+.pulse-amount span{margin-left:auto;font-size:8px;letter-spacing:.1em}
+.pulse-event{display:grid;grid-template-columns:minmax(60px,auto) minmax(0,1fr) minmax(74px,auto);align-items:center;gap:10px;padding:12px 0;min-width:0}
+.pulse-event-people{display:flex;align-items:center;justify-content:flex-start;gap:4px;min-width:0;flex:0 0 auto}
+.pulse-mini-avatar{width:24px;height:24px;flex:0 0 24px}
+.pulse-mini-avatar .human-face{width:100%;height:100%;object-fit:cover}
+.pulse-transfer-arrow{flex:0 0 auto;font-size:11px}
+.pulse-event-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
+.pulse-event-copy b{font-size:11px;line-height:1.35}
+.pulse-event-copy>span{font-size:10px;line-height:1.45;overflow-wrap:anywhere}
+.pulse-event-meta{display:flex;flex-direction:column;align-items:flex-end;gap:4px;min-width:0;text-align:right}
+.pulse-event-meta b{font-size:10px;line-height:1.35;max-width:100%}
+.pulse-event-meta small{font-size:9px;white-space:normal}
+.pulse-feed-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.pulse-filters{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.pulse-feature-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pulse-count{margin-left:auto}
+.site-footer{overflow:clip}
+.footer-inner{min-width:0}
+.footer-main{grid-template-columns:minmax(0,auto) minmax(0,1fr) auto}
+.footer-brand .mark{flex:0 0 auto}
+.footer-main p{overflow-wrap:anywhere}
+.footer-links{grid-template-columns:repeat(3,minmax(0,1fr))}
+.footer-nav-group{min-width:0}
+.footer-nav-group a,.footer-nav-group button{overflow-wrap:anywhere;word-break:normal}
+.footer-bottom>*{min-width:0}
+.hero{overflow:clip}
+.hero::before,.hero::after{transform-style:preserve-3d;will-change:transform}
+@media(max-width:900px){
+ .pulse-body{grid-template-columns:minmax(0,1fr)}
+ .pulse-flow{grid-template-columns:minmax(0,1fr) minmax(40px,.35fr) minmax(0,1fr)}
+ .pulse-node b{font-size:12px}
+ .pulse-event{grid-template-columns:minmax(58px,auto) minmax(0,1fr) minmax(78px,auto)}
+}
+@media(max-width:600px){
+ .exchange-pulse{padding-inline:18px}
+ .pulse-top{gap:22px}
+ .pulse-controls{display:flex;flex-wrap:wrap;gap:8px}
+ .pulse-body{gap:14px}
+ .pulse-feature{padding:16px}
+ .pulse-flow{grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr);gap:7px}
+ .pulse-node{gap:7px}
+ .pulse-avatar{width:34px;height:34px;flex-basis:34px}
+ .pulse-node b{font-size:10px;line-height:1.35}
+ .pulse-node small{font-size:7px}
+ .pulse-connector{gap:3px;min-width:20px}
+ .pulse-connector>span:not(.pulse-packet){width:3px;height:3px}
+ .pulse-amount{gap:6px 9px}
+ .pulse-amount span{margin-left:0}
+ .pulse-feed{padding:15px}
+ .pulse-event{grid-template-columns:54px minmax(0,1fr);gap:8px;padding:12px 0}
+ .pulse-event-people{gap:3px}
+ .pulse-mini-avatar{width:22px;height:22px;flex-basis:22px}
+ .pulse-mini-avatar .human-face{width:100%;height:100%}
+ .pulse-event-copy{grid-column:2;grid-row:1}
+ .pulse-event-meta{grid-column:2;grid-row:2;display:flex;flex-direction:row;align-items:baseline;justify-content:space-between;gap:8px;text-align:left}
+ .pulse-event-meta b{font-size:10px}
+ .pulse-event-meta small{font-size:9px}
+ .pulse-event-icon{width:28px;height:28px;display:grid;place-items:center}
+ .footer-main{grid-template-columns:minmax(0,1fr) auto;gap:9px 12px;padding:18px 0}
+ .footer-main .footer-brand{grid-column:1;grid-row:1;max-width:100%}
+ .footer-main p{grid-column:1/-1;grid-row:2;font-size:10px}
+ .footer-status{grid-column:2;grid-row:1;white-space:nowrap;font-size:7px}
+ .footer-links{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 22px;padding:20px 0}
+ .footer-nav-group:last-child{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:18px;align-items:start}
+ .footer-nav-group:last-child>b{grid-column:1/-1}
+ .footer-nav-group>a,.footer-nav-group>button{min-width:0;font-size:11px;padding:8px 0}
+ .footer-bottom{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:10px;padding:14px 0 17px}
+ .footer-bottom>span:first-child{grid-column:1/-1}
+ .footer-risk{grid-column:1/-1;order:initial;white-space:normal;overflow-wrap:anywhere}
+ .back-to-top{grid-column:2;grid-row:3;justify-self:end;margin:0}
+}
+@media(max-width:370px){
+ .exchange-pulse{padding-inline:14px}
+ .pulse-feature{padding:13px}
+ .pulse-flow{grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr);gap:5px}
+ .pulse-node{gap:5px}
+ .pulse-avatar{width:29px;height:29px;flex-basis:29px}
+ .pulse-node b{font-size:9px}
+ .pulse-event{grid-template-columns:48px minmax(0,1fr);gap:7px}
+ .pulse-mini-avatar{width:19px;height:19px;flex-basis:19px}
+ .pulse-transfer-arrow{font-size:9px}
+ .footer-links{column-gap:14px}
+ .footer-status{letter-spacing:.025em}
+}
+@media(prefers-reduced-motion:reduce){.hero::before,.hero::after{animation:none!important}}
