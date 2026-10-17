@@ -525,3 +525,20 @@ footer .mark{width:25px;height:25px}
   .footer-links { column-gap: 12px; }
 }
 @media (prefers-reduced-motion: reduce) { .footer-status i { animation: none !important; } }
+
+
+/* Small polish pass: preserve the existing Veylora layout and make its current activity feel more responsive. */
+.pulse-avatar { display:grid; place-items:center; transition: border-color .25s ease, background .25s ease, transform .25s ease; }
+.pulse-avatar svg, .pulse-event-people svg { color:#d2d9e5; stroke-width:1.7; }
+.pulse-node:hover .pulse-avatar { transform:translateY(-2px); border-color:rgba(211,224,245,.48); background:linear-gradient(145deg,#353b47,#171a20); }
+.pulse-event-people { display:flex; align-items:center; gap:7px; color:#8e97a7; }
+.pulse-event-people svg { flex:0 0 auto; }
+.pulse-event { animation: vey-event-arrive .38s cubic-bezier(.2,.8,.2,1) both; }
+.pulse-event:nth-child(2) { animation-delay:35ms; }
+.pulse-event:nth-child(3) { animation-delay:70ms; }
+.pulse-event:nth-child(4) { animation-delay:105ms; }
+.pulse-connector .pulse-packet { box-shadow:0 0 12px rgba(204,218,241,.6); }
+.pulse-feature { transition:border-color .25s ease, box-shadow .25s ease; }
+.pulse-feature:hover { border-color:rgba(198,211,232,.28); box-shadow:0 16px 46px rgba(0,0,0,.16); }
+@keyframes vey-event-arrive { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .pulse-event { animation:none !important; } }
