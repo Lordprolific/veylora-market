@@ -14,7 +14,7 @@ Never expose a Supabase service-role key in a browser bundle. Never put private 
 
 ## Current prototype scope
 - Responsive dark/silver market interface and labelled sample RFQs.
-- Noir Wallet extension connection and server-verified signed-message identity flow (review branch; requires the wallet-auth migration and Anonymous Sign-Ins setting).
+- Veylora Wallet project references and a documented native-connection bridge plan. The current Market wallet-auth flow still uses the legacy Noir SDK provider; the standalone Veylora extension does not yet expose a dApp bridge, so native wallet connectivity is not complete.
 - Create a live RFQ in Supabase.
 - Insert a bidder's offer under current row-level security policies.
 - Feedback UI and GitHub Issues link.
@@ -34,7 +34,7 @@ See [docs/TESTNET-INTEGRATION.md](./docs/TESTNET-INTEGRATION.md) for the verifie
 - Do not use this beta for valuable trades.
 
 ## Tester checklist
-Use at least two different Noir Wallet identities. Test extension detection, connect approval/cancellation, derived-message signing, challenge replay rejection, refresh/reconnect, account changes, RFQ creation, own-bid visibility, attempts to read another user's bid, duplicate/late offers, mobile layout and feedback. The wallet-auth branch is not production-ready until the matching migration is applied and end-to-end tests pass.
+Use the [Veylora Zcash Wallet repository](https://github.com/Lordprolific/veylora-testnet-wallet) and [Veylora Wallet integration plan](./docs/VEYLORA-WALLET-INTEGRATION.md) as the project's wallet references. Native extension connection is not available until the dApp bridge, explicit approval flow and real-browser testnet tests are implemented. Do not rely on the legacy Noir SDK connection path as proof that the standalone Veylora Wallet is connected.
 
 ## Release checklist
 See [docs/RELEASE-CHECKLIST.md](./docs/RELEASE-CHECKLIST.md) for frontend, backend integration, testnet, privacy and launch gates.
