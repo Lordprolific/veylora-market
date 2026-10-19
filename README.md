@@ -1,40 +1,87 @@
 # Veylora Market
 
-Early beta for private RFQs, sealed offers and clear settlement status, designed around shielded Zcash settlement.
+Veylora Market is an experimental privacy-focused marketplace for requests for quotation (RFQs), competing offers, and Zcash testnet settlement. A buyer publishes a request, suppliers submit offers, the buyer closes and awards the request under the configured rule, and settlement evidence is checked separately.
 
-## Setup
+> **Status: testnet beta.** Wallet connection and signature-based sign-in, persistent RFQ/offer storage, server-side award handling, and a transparent-output testnet settlement verifier are implemented. This is not an audited marketplace, does not provide operator-blind auctions, and must not be used for valuable trades.
+
+Live app: https://veylora-market.vercel.app/
+
+## Current functionality
+
+- **Wallet connection and identity verification:** connect through a supported injected Noir Wallet-compatible Zcash provider. Veylora requests a short-lived, origin-bound sign-in challenge; the wallet signs it; the server verifies the signature and links the wallet identity to the current Supabase session. This signature proves control of the wallet identity; it does not authorize a payment.
+- **Wallet fallback:** when no supported provider is detected, the app links to the confirmed Veylora testnet wallet extension release. The extension's direct native connection to the Market must be treated separately from the working provider-based sign-in path; do not assume the download link alone establishes a connection.
+- **Persistent RFQs and offers:** non-demo requests and offers are written to Supabase. Sample RFQs and transfer/activity previews are demo content and do not represent real transactions.
+- **Server-side close and award:** the owner can close a request after its deadline. The server selects the lowest eligible offer, breaking ties by earliest commitment, and records the result. Awarding a request is not the same as paying or completing it.
+- **Settlement state handling:** payment submission, network confirmation, and owner-confirmed completion are separate states.
+- **Zcash testnet verification:** configured server-side RPC endpoints check network identity and transaction evidence. The market settlement flow checks the winning offer's transparent recipient and amount and requires three confirmations before marking settlement confirmed.
+- **Network Lab:** `/testnet.html` provides testnet node health and transparent-output verification tools.
+- **Feedback:** the app provides feedback UI and a GitHub Issues fallback.
+
+## Wallet sign-in flow
+
+1. The user connects a supported injected Zcash wallet.
+2. The app obtains or creates a Supabase session.
+3. The server issues a random, five-minute, same-origin wallet sign-in challenge.
+4. The wallet signs the challenge message.
+5. The server verifies the signature, public key, address match, challenge expiry, and single-use challenge before linking the identity to the session.
+6. The verified session is required for protected marketplace actions.
+
+The website must never request a seed phrase, recovery phrase, private key, or wallet password. Wallet sign-in is separate from transaction signing and payment approval.
+
+## Local development
+
+Requirements: Node.js/npm, a Supabase project, and a Vercel-compatible environment for the serverless API routes.
+
 1. Create a Supabase project.
-2. Review and run [supabase/schema.sql](./supabase/schema.sql) in its SQL Editor.
-3. Enable Anonymous Sign-Ins in Supabase Auth for wallet-first sessions. Apply supabase/migrations/20261017_wallet_auth.sql only alongside the matching wallet-auth application release.
-4. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY from Supabase in local .env.local and in a separate Vercel project connected to this repository.
-5. Run npm install, npm run dev, then npm run build.
-6. Deploy the branch to a Vercel preview and smoke-test before sharing.
+2. Review and apply `supabase/schema.sql` in the Supabase SQL Editor.
+3. Apply the migrations in `supabase/migrations/` in chronological order, including the wallet-auth tables and server-role grants, before testing wallet sign-in against the matching application release.
+4. Enable Anonymous Sign-Ins in Supabase Auth for wallet-first sessions.
+5. Create `.env.local` with the public Supabase settings:
 
-Never expose a Supabase service-role key in a browser bundle. Never put private keys or wallet seed phrases in VITE_* variables.
+   ```dotenv
+   VITE_SUPABASE_URL=https://YOUR_PROJECT.supabase.co
+   VITE_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
+   ```
 
-## Current prototype scope
-- Responsive dark/silver market interface and labelled sample RFQs.
-- Veylora Wallet project references and a documented native-connection bridge plan. The current Market wallet-auth flow still uses the legacy Noir SDK provider; the standalone Veylora extension does not yet expose a dApp bridge, so native wallet connectivity is not complete.
-- Create a live RFQ in Supabase.
-- Insert a bidder's offer under current row-level security policies.
-- Feedback UI and GitHub Issues link.
-- Settlement receipt distinguishes market outcome, payment submission, network confirmation and completion.
-- A separate Network Lab at /testnet.html with a server-side testnet node health check and transparent-output transaction verification when a restricted Zcash testnet RPC node is configured.
+6. Configure the server-only variables in your local serverless environment and Vercel project as required by the server helpers:
 
-## Testnet Network Lab
-See [docs/TESTNET-INTEGRATION.md](./docs/TESTNET-INTEGRATION.md) for the verifier contract. The Vercel API checks `getblockchaininfo` and rejects any node not reporting `chain: test`; transaction verification also requires an explicit indication that initial block download is complete. Configure `ZCASH_RPC_URL` and either `ZCASH_RPC_API_KEY` (sent as `x-api-key`) or both `ZCASH_RPC_USER` and `ZCASH_RPC_PASSWORD`, plus `ZCASH_NETWORK=testnet`, as server-only variables. `VITE_ZCASH_EXPLORER_BASE_URL` is optional.
+   - `SUPABASE_URL`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+   - `ZCASH_RPC_URL`
+   - `ZCASH_NETWORK=testnet`
+   - `ZCASH_RPC_API_KEY`, or both `ZCASH_RPC_USER` and `ZCASH_RPC_PASSWORD`
+   - `VITE_ZCASH_EXPLORER_BASE_URL` is optional and must point to an appropriate testnet explorer.
 
-## Critical limits
-- Demo bids exist only in browser state and are not persistent.
-- Wallet-first sign-in currently uses Supabase anonymous sessions, which are browser/device-local. Account recovery or cross-device restoration is not implemented; do not clear site data for test accounts.
-- The server-side close-and-award and testnet settlement endpoints are scaffolded, but require server-only Supabase service-role and restricted testnet RPC configuration plus integration testing. Durable rate limiting, atomic database transactions and a reviewed audit trail remain required before any valuable trade.
-- The schema is a starting point and needs a security review; it does not itself provide complete bid immutability or robust concurrency controls.
-- The app can query a configured testnet node for transparent-output evidence, and the owner can record completion only after three-confirmation verification. It does not send transactions or verify shielded payment details. A txid alone is not proof of payment.
-- Shielded Zcash does not automatically hide app metadata or bids. The platform operator may access stored bid data. This is not operator-blind or zero-knowledge auction execution.
-- Do not use this beta for valuable trades.
+   The RPC node must be restricted and configured for Zcash testnet. Keep service-role and RPC credentials server-side; never expose them through `VITE_*` variables or the browser bundle.
+7. Install dependencies and run the app:
 
-## Tester checklist
-Use the [Veylora Zcash Wallet repository](https://github.com/Lordprolific/veylora-testnet-wallet) and [Veylora Wallet integration plan](./docs/VEYLORA-WALLET-INTEGRATION.md) as the project's wallet references. Native extension connection is not available until the dApp bridge, explicit approval flow and real-browser testnet tests are implemented. Do not rely on the legacy Noir SDK connection path as proof that the standalone Veylora Wallet is connected.
+   ```bash
+   npm install
+   npm run dev
+   npm run build
+   ```
 
-## Release checklist
-See [docs/RELEASE-CHECKLIST.md](./docs/RELEASE-CHECKLIST.md) for frontend, backend integration, testnet, privacy and launch gates.
+8. Deploy a Vercel preview and test wallet connection, sign-in, RFQ creation, offer submission, close/award, and settlement checks before sharing it.
+
+## Important limitations
+
+- **Not operator-blind:** bid rows are restricted by the current client-facing row-level security policies, but the platform operator and privileged server credentials may be able to access stored bid data. This is not zero-knowledge auction execution.
+- **No guaranteed privacy for metadata:** shielded Zcash does not automatically hide RFQ details, wallet identity metadata, IP/request logs, or data stored by the application.
+- **Transparent outputs only:** the settlement verifier does not verify shielded payment details or prove recipient ownership. A transaction ID alone is not proof of payment.
+- **The app does not broadcast settlement payments:** users must make payments through a wallet. The server checks the supplied transaction against configured testnet RPC evidence.
+- **Testnet only:** testnet assets have no intended monetary value. Mainnet or valuable trades are out of scope.
+- **Wallet support:** the Market currently uses `@noir-wallet/sdk` and its injected provider interface. The standalone Veylora extension is a separate project; native extension-to-site connectivity should only be claimed after the bridge and end-to-end browser tests have passed.
+- **Anonymous session recovery:** wallet-first sessions use Supabase anonymous sessions. Account recovery or cross-device restoration is not implemented; clearing browser/site data can lose access to that session.
+- **Security and operations:** the schema and server routes require ongoing security review, integration testing, durable rate limiting, concurrency testing, monitoring, and a reviewed audit trail before valuable trades.
+
+## Related projects and documentation
+
+- [Veylora Zcash Wallet](https://github.com/Lordprolific/veylora-testnet-wallet)
+- [Confirmed testnet wallet release](https://github.com/Lordprolific/veylora-testnet-wallet/releases/tag/wallet-confirmed-2026-10-19)
+- [Wallet integration notes](./docs/VEYLORA-WALLET-INTEGRATION.md)
+- [Testnet integration guide](./docs/TESTNET-INTEGRATION.md)
+- [Release checklist](./docs/RELEASE-CHECKLIST.md)
+
+## Safety
+
+This project is experimental and unaudited. Do not use it for valuable trades or real funds. Testnet assets have no intended monetary value. Do not expose credentials, request recovery phrases on the website, or describe a payment as confirmed until the configured verifier has checked the required evidence.
