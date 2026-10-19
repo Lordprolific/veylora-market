@@ -8,9 +8,17 @@ Early beta for private RFQs, sealed offers and clear settlement status, designed
 3. Configure email signup, site URL and redirect URLs in Supabase Auth.
 4. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY from Supabase in local .env.local and in a separate Vercel project connected to this repository.
 5. Run npm install, npm run dev, then npm run build.
-6. Deploy the beta/same-day-mvp branch to Vercel preview and smoke-test before sharing.
+6. Deploy a preview and smoke-test before sharing.
 
 Never expose a Supabase service-role key in a browser bundle. Never put private keys or wallet seed phrases in VITE_* variables.
+
+## Wallet integration status
+
+Veylora Market is intended to work with the **Veylora Zcash Wallet**. The current Market build does **not yet connect to a browser wallet or submit a Zcash transaction**. Installing Veylora Wallet alone will not make a wallet-connect button appear or enable settlement.
+
+The Veylora Wallet repository currently contains a standalone experimental Chrome extension and a separate dApp lab that uses the Noir Wallet SDK. That lab is not evidence that the standalone Veylora extension exposes a compatible dApp provider. Do not install Noir as a prerequisite for Veylora Market.
+
+See [Wallet integration status and implementation plan](./docs/wallet-integration.md) for the required bridge and verification work.
 
 ## Current prototype scope
 - Responsive dark/silver market interface and labelled sample RFQs.
