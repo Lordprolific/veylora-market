@@ -1,5 +1,5 @@
-import { allowRequest, clientKey } from '../../../server/zcash-rpc'
-import { authenticatedUser, bearerToken, sendJson, serviceClient, SupabaseConfigurationError, SupabaseRequestError } from '../../../server/supabase'
+import { allowRequest, clientKey } from '../../../server/zcash-rpc.js'
+import { authenticatedUser, bearerToken, sendJson, serviceClient, SupabaseConfigurationError, SupabaseRequestError } from '../../../server/supabase.js'
 
 type Request = { method?: string; headers?: Record<string, string | string[] | undefined> }
 type Response = { status: (code: number) => { json: (body: unknown) => unknown } }
