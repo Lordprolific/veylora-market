@@ -1,5 +1,6 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
+import { Analytics } from '@vercel/analytics/react'
 import SitePage from './SitePage'
 import './styles.css'
-createRoot(document.getElementById('root')!).render(<React.StrictMode><SitePage /></React.StrictMode>)
+createRoot(document.getElementById('root')!).render(<React.StrictMode><SitePage /><Analytics /></React.StrictMode>)
