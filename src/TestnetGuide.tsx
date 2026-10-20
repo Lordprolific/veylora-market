@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, type FormEvent } from 'react'
 import { ArrowLeft, ArrowUpRight, CheckCircle2, CircleAlert, ExternalLink, ShieldCheck, TestTube2, Wifi, RefreshCw } from 'lucide-react'
 import { getZcashNetworkConfig, isTransactionIdFormat, looksLikeZcashAddress, transactionExplorerUrl } from './lib/zcash-testnet'
 import './testnet.css'
+import ThemeControl from './ThemeControl'
 
 type NetworkResult = { ok: boolean; network?: string; chain?: string; blocks?: number | null; headers?: number | null; synced?: boolean; error?: string; checkedAt?: string }
 type TransactionResult = { ok: boolean; verified: boolean; network?: string; state?: string; txid?: string; confirmations?: number; requiredConfirmations?: number; recipientMatched?: boolean; amountMatched?: boolean; checkedAt?: string; error?: string; message?: string; note?: string }
@@ -80,6 +81,6 @@ export default function TestnetGuide() {
     </section>
     <section className="integration-checklist"><div className="card-index">03 / SETTLEMENT STATES</div><h2>Evidence before completion</h2><div className="gate-list">{[['Awarded','A market decision has been recorded by trusted server logic.'],['Submitted','A txid has been supplied; payment is not yet proven.'],['Confirmed','The configured testnet node confirms the expected transparent output and depth.'],['Completed','The trusted settlement workflow records completion idempotently.']].map(([title,desc],i)=><div className="gate-row" key={title}><span>{String(i+1).padStart(2,'0')}</span><div><b>{title}</b><p>{desc}</p></div><span className="gate-state">{i===2?'NODE-VERIFIED WHEN CONFIGURED':'BACKEND GATE'}</span></div>)}</div></section>
     <section className="integration-checklist"><div className="card-index">04 / BETA SAFETY</div><h2>Keep the boundaries explicit</h2><div className="gate-list">{[['Testnet only','The server refuses to verify unless the node reports chain = test.'],['No key custody','Never enter a seed phrase, private key or viewing key.'],['Transparent outputs only','Shielded payment conditions need a wallet-aware verification design.'],['Backend completion gate','A UI result must not itself award a market or mark a trade complete.']].map(([title,desc],i)=><div className="gate-row" key={title}><span>{String(i+1).padStart(2,'0')}</span><div><b>{title}</b><p>{desc}</p></div><span className="gate-state">ENFORCED / DOCUMENTED</span></div>)}</div></section>
-    <footer className="testnet-footer"><span>VEYLORA / NETWORK LAB</span><span>NO FUNDS MOVED BY THIS PAGE</span><a href="https://zcash.readthedocs.io/en/latest/rtd_pages/dev_tools.html" target="_blank" rel="noreferrer">Official Zcash developer tools <ArrowUpRight size={13}/></a></footer>
+    <footer className="testnet-footer"><ThemeControl /><span>VEYLORA / NETWORK LAB</span><span>NO FUNDS MOVED BY THIS PAGE</span><a href="https://zcash.readthedocs.io/en/latest/rtd_pages/dev_tools.html" target="_blank" rel="noreferrer">Official Zcash developer tools <ArrowUpRight size={13}/></a></footer>
   </main>
 }
