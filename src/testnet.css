@@ -45,3 +45,8 @@ html[data-theme="light"] .theme-options button{color:#626975}
 html[data-theme="light"] .theme-options button:hover{background:#e3e7ed;color:#242831}
 html[data-theme="light"] .theme-options button.selected{background:#fff;color:#20242b;border-color:#c5cbd5;box-shadow:0 1px 3px #20283812}
 @media(max-width:700px){.testnet-footer .theme-control{width:100%;margin:0 0 8px}}
+
+
+/* Keep the Network Lab theme selector separate from footer notices */
+.testnet-footer>.theme-control{flex:0 0 100%;width:100%;margin:0 0 8px}
+.testnet-footer{flex-wrap:wrap;row-gap:12px}
