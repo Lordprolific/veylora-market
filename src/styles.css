@@ -1026,3 +1026,13 @@ html[data-theme="light"] .info-sidebar a,html[data-theme="light"] .info-footer a
 html[data-theme="light"] .info-sidebar a.current{background:#e7eaf0;color:#17191d}
 html[data-theme="light"] .info-draft,html[data-theme="light"] .info-endnote{background:#eef1f5;border-color:#d7dde5;color:#424956}
 @media(max-width:700px){.footer-bottom .theme-control{width:100%;margin:0 0 12px}.info-footer .theme-control{width:100%;margin:0 0 8px}}
+
+
+/* Keep the theme selector on its own footer row, separate from legal/status text */
+.footer-bottom>.theme-control{flex:0 0 100%!important;width:100%!important;margin:0 0 8px!important}
+.info-footer>.theme-control{flex:0 0 100%!important;width:100%!important;margin:0 0 8px!important}
+.footer-bottom>span{min-width:0;overflow-wrap:anywhere}
+@media(min-width:701px){
+  .footer-bottom{row-gap:12px!important}
+  .info-footer{row-gap:14px!important}
+}
