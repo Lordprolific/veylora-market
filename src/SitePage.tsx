@@ -1,4 +1,5 @@
 import { ArrowLeft, ArrowUpRight, CheckCircle2, CircleHelp, FileText, LockKeyhole, Sparkles } from 'lucide-react'
+import ThemeControl from './ThemeControl'
 
 type Section = { heading: string; paragraphs?: string[]; bullets?: string[] }
 type Page = { eyebrow: string; title: string; lead: string; sections: Section[] }
@@ -124,6 +125,6 @@ export default function SitePage() {
       </div>
       <section className="info-cta"><div><span className="eyebrow muted"><Sparkles size={12}/> CONTINUE EXPLORING</span><h2>Know what the system<br/>can actually prove.</h2><p>Review the settlement model or return to the market.</p></div><div className="info-cta-actions"><a className="primary" href="/testnet.html">Open Network Lab <ArrowUpRight size={14}/></a><a className="quiet" href="/">Return to market</a></div></section>
     </main>
-    <footer className="info-footer"><a className="brand" href="/"><span className="mark"><img src="/veylora-mark.svg" alt="Veylora Market logo" /></span><span><b>VEYLORA</b><small>PRIVATE MARKET</small></span></a><span>PRIVATE MARKET INFRASTRUCTURE · BETA</span><div><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Contact</a></div></footer>
+    <footer className="info-footer"><ThemeControl /><a className="brand" href="/"><span className="mark"><img src="/veylora-mark.svg" alt="Veylora Market logo" /></span><span><b>VEYLORA</b><small>PRIVATE MARKET</small></span></a><span>PRIVATE MARKET INFRASTRUCTURE · BETA</span><div><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Contact</a></div></footer>
   </div>
 }
