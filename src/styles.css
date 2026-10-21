@@ -1055,3 +1055,24 @@ html[data-theme="light"] .info-draft,html[data-theme="light"] .info-endnote{back
 html[data-theme="light"] .shell>.mercury-gradient{opacity:.2;mix-blend-mode:multiply}
 @media(prefers-reduced-motion:reduce){.shell>.mercury-gradient:before,.shell>.mercury-gradient:after,.shell>.mercury-gradient span{animation:none!important}.shell>.mercury-gradient{opacity:.25}}
 @media(max-width:700px){.shell>.mercury-gradient{opacity:.36}}
+
+
+/* Desktop footer: give appearance controls their own row, clear of copyright and beta notices. */
+@media(min-width:701px){
+  .footer-bottom{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto;
+    align-items:center;
+    column-gap:24px!important;
+    row-gap:12px!important;
+  }
+  .footer-bottom>.theme-control{
+    grid-column:1 / -1;
+    grid-row:1;
+    width:100%!important;
+    margin:0!important;
+  }
+  .footer-bottom>span:nth-of-type(1){grid-column:1;grid-row:2;}
+  .footer-bottom>.footer-status{grid-column:2;grid-row:2;justify-self:end;}
+  .footer-bottom>.footer-risk{grid-column:1 / -1;grid-row:3;justify-self:start;max-width:100%;}
+}
