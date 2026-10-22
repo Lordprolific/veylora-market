@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111316"/>
+      <stop offset="1" stop-color="#050607"/>
+    </linearGradient>
+    <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.52" stop-color="#d8dbe0"/>
+      <stop offset="1" stop-color="#8d949f"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#aab3c2" stop-opacity=".14"/>
+      <stop offset="1" stop-color="#aab3c2" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="930" cy="305" r="360" fill="url(#glow)"/>
+  <rect x="42" y="42" width="1116" height="546" rx="24" fill="none" stroke="#ffffff" stroke-opacity=".12"/>
+  <g transform="translate(100 92) scale(1.28)" fill="url(#silver)">
+    <path d="M5.5 5.5C22.8 5.5 30.5 13.2 32 32C13.2 30.5 5.5 22.8 5.5 5.5Z"/>
+    <path d="M58.5 5.5C58.5 22.8 50.8 30.5 32 32C33.5 13.2 41.2 5.5 58.5 5.5Z"/>
+    <path d="M5.5 58.5C5.5 41.2 13.2 33.5 32 32C30.5 50.8 22.8 58.5 5.5 58.5Z"/>
+    <path d="M58.5 58.5C41.2 58.5 33.5 50.8 32 32C50.8 33.5 58.5 41.2 58.5 58.5Z"/>
+  </g>
+  <text x="100" y="232" fill="#aeb4be" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600" letter-spacing="5">PRIVATE MARKETS · TESTNET BETA</text>
+  <text x="96" y="330" fill="#f5f6f8" font-family="Arial, Helvetica, sans-serif" font-size="76" font-weight="600" letter-spacing="-2">Veylora Market</text>
+  <text x="100" y="390" fill="#c2c7cf" font-family="Arial, Helvetica, sans-serif" font-size="29">Private requests. Competing offers.</text>
+  <text x="100" y="430" fill="#c2c7cf" font-family="Arial, Helvetica, sans-serif" font-size="29">Clear settlement status.</text>
+  <path d="M100 486H245" stroke="url(#silver)" stroke-width="2"/>
+  <text x="100" y="530" fill="#f0f1f4" font-family="Arial, Helvetica, sans-serif" font-size="21" letter-spacing="2">BID PRIVATELY. TRADE GLOBALLY.</text>
+  <text x="1090" y="530" text-anchor="end" fill="#8e96a3" font-family="Arial, Helvetica, sans-serif" font-size="17">veylora-market.vercel.app</text>
+</svg>
