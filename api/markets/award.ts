@@ -1,5 +1,5 @@
 import { allowRequest, clientKey } from '../../server/zcash-rpc'
-import { authenticatedUser, bearerToken, sendJson, serviceClient, SupabaseConfigurationError, SupabaseRequestError } from '../../server/supabase'
+import { authenticatedUser, bearerToken, hasVerifiedTestnetWallet, sendJson, serviceClient, SupabaseConfigurationError, SupabaseRequestError } from '../../server/supabase'
 
 type Request = { method?: string; body?: unknown; headers?: Record<string, string | string[] | undefined> }
 type Response = { status: (code: number) => { json: (body: unknown) => unknown } }
@@ -17,6 +17,7 @@ export default async function handler(req: Request, res: Response) {
   try {
     const db = serviceClient()
     const user = await authenticatedUser(db, token)
+    if (!(await hasVerifiedTestnetWallet(db, user.id))) return sendJson(res, 403, { ok: false, error: 'A verified Zcash testnet wallet is required for market operations.' })
     const marketResult = await db.from('markets').select('id,owner_id,closes_at,status,winner_bid_id').eq('id', marketId).maybeSingle()
     if (marketResult.error) throw new Error('Could not load the market record.')
     const market = marketResult.data
