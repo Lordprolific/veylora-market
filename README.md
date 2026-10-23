@@ -1,12 +1,16 @@
 # Veylora Market
 
-Veylora Market is an experimental privacy-focused marketplace for requests for quotation (RFQs), competing offers, and Zcash testnet settlement. A buyer publishes a request, suppliers submit offers, the buyer closes and awards the request under the configured rule, and settlement evidence is checked separately.
+Veylora Market is an experimental privacy-focused Web3 deal desk for requests for quotation (RFQs) and competing offers. The first supported deal categories are OTC and token deals, DAO procurement, and Web3 services. A buyer publishes a request, suppliers submit offers, the buyer closes and awards the request under the current rule, and Zcash testnet settlement evidence is checked separately.
 
-> **Status: testnet beta.** Wallet connection and signature-based sign-in, persistent RFQ/offer storage, server-side award handling, and a transparent-output testnet settlement verifier are implemented. This is not an audited marketplace, does not provide operator-blind auctions, and must not be used for valuable trades.
+> **Status: testnet beta.** Wallet connection and signature-based sign-in, persistent RFQ/offer storage, server-side award handling, category-aware Web3 requests, verified-testnet-wallet write policies, and a transparent-output testnet settlement verifier are implemented. This is not an audited marketplace, does not provide operator-blind auctions, and must not be used for valuable trades.
 
 Live app: https://veylora-market.vercel.app/
 
 ## Current functionality
+
+- **V2 deal categories:** OTC & token deals, DAO procurement, and Web3 services share one RFQ/offer lifecycle. Liquidity and market-maker sourcing are planned for a later phase. Category selection is stored with each database RFQ; existing requests default to OTC for compatibility.
+- **Award-rule limitation:** the current server-side award endpoint selects the lowest eligible offer, breaking ties by earliest commitment, across all categories. It does not score audit quality, provider experience, delivery plans, or qualitative service proposals. Buyers must not treat an automatic award as a quality assessment; category-specific evaluation is future work.
+- **Wallet-gated writes:** RLS requires a server-verified Zcash testnet wallet identity before a session can create a market or submit an offer. Users can read only their own verified wallet identity; wallet-auth challenges remain server-only.
 
 - **Wallet connection and identity verification:** connect through a supported injected Noir Wallet-compatible Zcash provider. Veylora requests a short-lived, origin-bound sign-in challenge; the wallet signs it; the server verifies the signature and links the wallet identity to the current Supabase session. This signature proves control of the wallet identity; it does not authorize a payment.
 - **Wallet fallback:** when no supported provider is detected, the app links to the confirmed Veylora testnet wallet extension release. The extension's direct native connection to the Market must be treated separately from the working provider-based sign-in path; do not assume the download link alone establishes a connection.
@@ -34,7 +38,7 @@ Requirements: Node.js/npm, a Supabase project, and a Vercel-compatible environme
 
 1. Create a Supabase project.
 2. Review and apply `supabase/schema.sql` in the Supabase SQL Editor.
-3. Apply the migrations in `supabase/migrations/` in chronological order, including the wallet-auth tables and server-role grants, before testing wallet sign-in against the matching application release.
+3. Apply the migrations in `supabase/migrations/` in chronological order, including wallet-auth tables, server-role grants, and the V2 category and verified-wallet-write migration, before testing wallet sign-in against the matching application release.
 4. Enable Anonymous Sign-Ins in Supabase Auth for wallet-first sessions.
 5. Create `.env.local` with the public Supabase settings:
 
