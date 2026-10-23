@@ -64,26 +64,15 @@ alter table public.feedback enable row level security;
 
 -- Market discovery is public, but market edits belong to the creator.
 create policy "markets readable" on public.markets for select using (true);
-create policy "verified wallet users create markets" on public.markets for insert to authenticated with check (
-  (select auth.uid()) = owner_id and exists (
-    select 1 from public.wallet_identities wi where wi.user_id = (select auth.uid()) and wi.network = 'testnet'
-  )
-);
+create policy "authenticated users create markets" on public.markets for insert to authenticated with check (auth.uid() = owner_id);
 -- No client-side UPDATE policy: market closure and awards must be written by trusted server-side logic.
 create policy "owners delete open markets" on public.markets for delete to authenticated using (auth.uid() = owner_id and status = 'open');
 
--- Wallet identities remain server-written; a user can read only their own verified identity.
-alter table public.wallet_identities enable row level security;
-revoke all on public.wallet_identities from anon, authenticated;
-grant select on public.wallet_identities to authenticated;
-create policy "users read own wallet identity" on public.wallet_identities for select to authenticated using ((select auth.uid()) = user_id);
-
 -- Important: bid rows are intentionally NOT readable to other participants.
 create policy "bidder reads own bids" on public.bids for select to authenticated using (auth.uid() = bidder_id);
-create policy "verified wallet bidder submits own bid" on public.bids for insert to authenticated with check (
-  (select auth.uid()) = bidder_id
-  and exists (select 1 from public.wallet_identities wi where wi.user_id = (select auth.uid()) and wi.network = 'testnet')
-  and exists (select 1 from public.markets m where m.id = market_id and m.status = 'open' and m.closes_at > now() and m.owner_id <> (select auth.uid()))
+create policy "authenticated bidder submits own bid" on public.bids for insert to authenticated with check (
+  auth.uid() = bidder_id
+  and exists (select 1 from public.markets m where m.id = market_id and m.status = 'open' and m.closes_at > now() and m.owner_id <> auth.uid())
 );
 create policy "bidder cannot edit committed bid" on public.bids for update using (false);
 create policy "bidder cannot delete committed bid" on public.bids for delete using (false);
