@@ -1390,3 +1390,44 @@ header{position:relative;}
  .landing-page .exchange-pulse .pulse-top{gap:18px}
  .landing-page .exchange-pulse .pulse-controls{justify-content:flex-start}
 }
+
+
+/* Desktop landing alignment: consistent content rails and balanced hero artwork. */
+@media (min-width: 1001px) {
+  .landing-page .hero {
+    min-height: 560px;
+    padding: 88px clamp(64px, 9vw, 144px) 72px;
+  }
+  .landing-page .hero h1 {
+    max-width: 650px;
+    text-wrap: balance;
+  }
+  .landing-page .hero > p {
+    max-width: 455px;
+  }
+  .landing-page .hero-art {
+    right: clamp(58px, 8.5vw, 136px);
+    width: min(34vw, 400px);
+  }
+  .landing-page .flow-section,
+  .landing-page .exchange-pulse {
+    padding-left: clamp(64px, 9vw, 144px);
+    padding-right: clamp(64px, 9vw, 144px);
+  }
+  .landing-page .flow-section > *,
+  .landing-page .exchange-pulse > * {
+    min-width: 0;
+  }
+}
+@media (min-width: 1001px) and (max-width: 1200px) {
+  .landing-page .hero {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+  .landing-page .hero h1 { max-width: 560px; }
+  .landing-page .hero-art {
+    right: 38px;
+    width: 34vw;
+    opacity: .64;
+  }
+}
