@@ -1433,10 +1433,13 @@ header{position:relative;}
 }
 
 
-/* Route separation: the landing page is a product introduction, not the market workspace. */
-.landing-page header nav,
-.landing-page header .head-actions,
-.landing-page header .header-menu { display: none !important; }
+/* Route separation: preserve the full marketing page and keep trading controls inside the marketplace. */
 .landing-page .hero-actions { flex-wrap: wrap; }
-.marketplace-page .hero,
-.marketplace-page .flow-section { display: none !important; }
+.landing-page header { justify-content: space-between; }
+.landing-page .landing-nav { display: flex; align-items: center; gap: clamp(12px, 2vw, 28px); margin-left: auto; }
+.landing-page .landing-nav a { display: inline-flex; align-items: center; gap: 6px; color: #c3c8d2; font-size: 11px; text-decoration: none; white-space: nowrap; transition: color .2s; }
+.landing-page .landing-nav a:hover { color: #fff; }
+.landing-page .landing-nav a:nth-last-child(-n+2) { border: 1px solid rgba(205,214,228,.18); padding: 10px 12px; border-radius: 4px; }
+.marketplace-page .hero, .marketplace-page .flow-section { display: none !important; }
+@media(max-width:850px){.landing-page .landing-nav { gap: 10px; }.landing-page .landing-nav a { font-size: 10px; }}
+@media(max-width:700px){.landing-page .landing-nav { display: none; }}
