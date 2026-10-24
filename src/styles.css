@@ -1127,7 +1127,7 @@ html[data-theme="light"] .board-row,html[data-theme="light"] .recent-request{col
 
 
 /* Homepage hierarchy: the application dashboard is the first and primary surface */
-.dashboard-shell>header,.dashboard-shell .hero{display:none!important}
+.dashboard-shell>header{display:none!important}
 .dashboard-shell>main{position:relative;z-index:1;padding-top:18px}
 .dashboard-shell .market-command-center{margin-top:0}
 .dashboard-shell .dashboard-topline{align-items:center}
@@ -1275,4 +1275,65 @@ body{background:linear-gradient(180deg,#08090b 0%,#090a0c 48%,#08090b 100%)}
   .dashboard-shell .market-dashboard button,
   .dashboard-shell #markets button,
   .dashboard-shell .market-primary-nav .side-link{transition:none!important}
+}
+
+
+/* Homepage structure: preserve the original hero, then introduce the process as its own section. */
+.dashboard-shell > main { padding-top:0; }
+.dashboard-shell .hero {
+  display:block !important;
+  min-height:500px;
+  padding:clamp(64px,8vw,98px) clamp(24px,8vw,110px) 68px;
+  border-bottom:1px solid rgba(205,211,222,.16);
+  background:
+    radial-gradient(ellipse at 78% 48%,rgba(220,224,232,.055),transparent 34%),
+    linear-gradient(112deg,#08090b 0%,#101114 52%,#090a0c 100%);
+}
+.dashboard-shell .hero:after {
+  background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+}
+.dashboard-shell .hero h1 { max-width:720px; }
+.dashboard-shell .hero > p { max-width:490px; }
+.dashboard-shell .hero-art:before {
+  background:radial-gradient(circle,rgba(215,220,229,.095),rgba(112,118,129,.025) 46%,transparent 72%);
+}
+.dashboard-shell .hero-orbit { border-color:rgba(210,216,226,.19);box-shadow:0 0 24px rgba(210,216,226,.025),inset 0 0 22px rgba(210,216,226,.025); }
+.dashboard-shell .orbit-two { border-color:rgba(210,216,226,.14); }
+.dashboard-shell .orbit-three { border-color:rgba(210,216,226,.11); }
+.dashboard-shell .orbit-node { border-color:rgba(218,223,232,.28);background:linear-gradient(145deg,#dfe2e8,#555a63 68%,#191a1e);box-shadow:0 0 20px rgba(213,220,232,.12); }
+.dashboard-shell .art-caption { color:#aeb3bd; }
+.dashboard-shell .hero h1 em { color:#c3c7d0; }
+.dashboard-shell .flow-section {
+  margin:0;
+  padding:clamp(44px,6vw,76px) clamp(22px,8vw,110px);
+  border-bottom:1px solid rgba(205,211,222,.13);
+  background:
+    radial-gradient(ellipse at 16% 0%,rgba(211,218,230,.045),transparent 40%),
+    linear-gradient(180deg,#0c0d10 0%,#090a0c 100%);
+}
+.dashboard-shell .flow-section .flow-intro h2 { max-width:460px; }
+.dashboard-shell .flow-section .flow-step {
+  background:linear-gradient(145deg,rgba(24,25,29,.88),rgba(12,13,16,.96));
+  border-color:rgba(205,211,222,.14);
+}
+.dashboard-shell .flow-section .flow-step:hover { border-color:rgba(222,227,236,.32); }
+.dashboard-shell .dashboard-topline {
+  background:linear-gradient(110deg,#111215 0%,#0d0e11 58%,#090a0c 100%);
+}
+.dashboard-shell #markets { scroll-margin-top:18px; }
+.dashboard-shell .backdrop { position:fixed;inset:0;z-index:1000; }
+.dashboard-shell .modal { max-height:calc(100dvh - 36px);overscroll-behavior:contain; }
+@media(max-width:900px) {
+  .dashboard-shell .hero { min-height:460px;padding:68px 28px 52px; }
+  .dashboard-shell .hero-art { right:1vw;width:min(42vw,340px);opacity:.72; }
+}
+@media(max-width:700px) {
+  .dashboard-shell > main { padding:0 0 28px; }
+  .dashboard-shell .hero { min-height:0;padding:58px 20px 40px; }
+  .dashboard-shell .hero h1 { max-width:100%;font-size:clamp(43px,12vw,58px); }
+  .dashboard-shell .hero-art { right:-105px;top:45%;width:260px;opacity:.24; }
+  .dashboard-shell .hero > p { max-width:330px; }
+  .dashboard-shell .flow-section { padding:42px 18px; }
+  .dashboard-shell .flow-section .flow-steps { grid-template-columns:1fr; }
+  .dashboard-shell .flow-section .flow-step { min-height:0; }
 }
