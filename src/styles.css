@@ -1124,3 +1124,20 @@ html[data-theme="light"] .dashboard-topline{background:linear-gradient(110deg,#f
 html[data-theme="light"] .dashboard-topline p,html[data-theme="light"] .overview-cell>small,html[data-theme="light"] .dashboard-category-grid small,html[data-theme="light"] .recent-empty,html[data-theme="light"] .recent-disclaimer{color:#637184}
 html[data-theme="light"] .board-caption{background:#eef2f6;color:#64768a}
 html[data-theme="light"] .board-row,html[data-theme="light"] .recent-request{color:#3c4b5d;border-color:#e0e5eb}
+
+
+/* Homepage hierarchy: the application dashboard is the first and primary surface */
+.dashboard-shell>header,.dashboard-shell .hero{display:none!important}
+.dashboard-shell>main{position:relative;z-index:1;padding-top:18px}
+.dashboard-shell .market-command-center{margin-top:0}
+.dashboard-shell .dashboard-topline{align-items:center}
+.dashboard-account-state{display:flex;align-items:center;gap:7px;margin-top:12px;color:#90a5bb;font-size:10px}
+.account-dot{display:inline-block;width:6px;height:6px;flex:0 0 6px;border-radius:50%;background:#8396a9}
+.account-dot.verified{background:#72d7b5;box-shadow:0 0 10px #72d7b577}
+.dashboard-top-actions{display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap}
+.dashboard-top-actions .dashboard-wallet{display:inline-flex;align-items:center;gap:6px;min-height:35px;padding:9px 10px;border:1px solid rgba(150,182,213,.23);border-radius:6px;background:rgba(5,13,22,.65);font-size:10px;color:#c3d2e2;white-space:nowrap}
+.dashboard-top-actions .dashboard-feedback{font-size:10px}
+.dashboard-shell #markets{scroll-margin-top:20px;padding-top:28px}
+.dashboard-shell .exchange-pulse,.dashboard-shell .flow-section,.dashboard-shell .settlement,.dashboard-shell .privacy{margin-top:24px}
+.dashboard-shell .site-footer{margin-top:24px}
+@media(max-width:700px){.dashboard-shell>main{padding-top:8px}.dashboard-shell .dashboard-topline{align-items:flex-start}.dashboard-top-actions{justify-content:flex-start;width:100%;gap:6px}.dashboard-top-actions .dashboard-wallet{font-size:9px;min-height:32px;padding:8px}.dashboard-account-state{font-size:9px;line-height:1.5}.dashboard-shell #markets{padding-top:18px}}
