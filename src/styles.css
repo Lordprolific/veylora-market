@@ -1343,3 +1343,31 @@ header{position:relative;}
 .header-menu{position:absolute;right:clamp(20px,6vw,90px);top:calc(100% + 6px);z-index:20;display:flex;flex-direction:column;min-width:170px;padding:6px;background:#101114;border:1px solid #34363d;border-radius:5px;box-shadow:0 12px 32px #0008;}
 .header-menu a{padding:10px 12px;color:#c8cbd1;font-size:11px;border-radius:3px;}
 .header-menu a:hover{background:#202126;color:#fff;}
+
+
+/* Two-surface experience: concise public introduction, dedicated marketplace workspace. */
+.landing-page .market-command-center,
+.landing-page #markets,
+.landing-page .exchange-pulse,
+.landing-page .settlement,
+.landing-page .privacy{display:none!important}
+.landing-page .site-footer{margin-top:0}
+.landing-page .hero{min-height:540px;display:flex;flex-direction:column;justify-content:center}
+.landing-page .hero-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.landing-page .hero-secondary{min-height:44px;padding:12px 16px;border:1px solid rgba(218,223,232,.2);background:rgba(18,19,22,.55);color:#d8dbe2;display:inline-flex;align-items:center;gap:8px}
+.landing-page .landing-note{display:flex;align-items:center;gap:8px;margin-top:22px;color:#8f949e;font-size:10px;letter-spacing:.015em}
+.landing-page .flow-section{padding-bottom:clamp(54px,7vw,86px)}
+.marketplace-page .hero,.marketplace-page .flow-section{display:none!important}
+.marketplace-page>main{padding-top:18px}
+.marketplace-page .market-command-center{margin-top:0}
+.marketplace-page .market-dashboard{padding-top:4px}
+.marketplace-page .site-footer{margin-top:28px}
+.marketplace-page header .brand{cursor:pointer}
+.marketplace-page header .brand:hover{opacity:.88}
+@media(max-width:700px){
+ .landing-page .hero{min-height:0;padding:62px 20px 44px}
+ .landing-page .hero-actions{align-items:stretch;flex-direction:column;width:100%;max-width:320px}
+ .landing-page .hero-actions button{justify-content:center}
+ .landing-page .landing-note{align-items:flex-start;max-width:310px;line-height:1.6}
+ .marketplace-page>main{padding-top:8px}
+}
