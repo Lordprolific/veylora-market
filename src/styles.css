@@ -1338,10 +1338,8 @@ body{background:linear-gradient(180deg,#08090b 0%,#090a0c 48%,#08090b 100%)}
   .dashboard-shell .flow-section .flow-step { min-height:0; }
 }
 
-/* Compact header menu, aligned with the production navigation. */
+/* Compact informational menu; keep the production header layout unchanged. */
 header{position:relative;}
-.header-menu{position:absolute;right:clamp(20px,6vw,90px);top:calc(100% + 8px);z-index:20;display:flex;flex-direction:column;gap:0;min-width:170px;padding:6px;background:#101114;border:1px solid #34363d;border-radius:5px;box-shadow:0 12px 32px #0008;}
+.header-menu{position:absolute;right:clamp(20px,6vw,90px);top:calc(100% + 6px);z-index:20;display:flex;flex-direction:column;min-width:170px;padding:6px;background:#101114;border:1px solid #34363d;border-radius:5px;box-shadow:0 12px 32px #0008;}
 .header-menu a{padding:10px 12px;color:#c8cbd1;font-size:11px;border-radius:3px;}
 .header-menu a:hover{background:#202126;color:#fff;}
-@media(max-width:900px){header{gap:18px;padding-left:20px;padding-right:20px}.head-actions{gap:6px}.head-actions .account-action{display:none}header nav{gap:14px}.header-menu{right:20px}}
-@media(max-width:650px){header{height:auto;min-height:70px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px;gap:12px}.brand{margin-right:auto}header nav{order:3;flex-basis:100%;height:34px;gap:18px}header nav button{font-size:10px}.head-actions{margin-left:auto}.head-actions .wallet-connect{font-size:0;padding:9px}.head-actions .wallet-connect .wallet-indicator{margin:0}.head-actions .primary{padding:9px;font-size:10px}.header-menu{top:100%;right:12px}}
