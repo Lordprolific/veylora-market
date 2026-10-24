@@ -74,6 +74,11 @@ export default function App(){
    <button className="side-link" onClick={()=>{setMenuOpen(false);setTab('My activity');document.getElementById('markets')?.scrollIntoView({behavior:'smooth'})}}><LockKeyhole size={15}/> My Offers</button>
    <button className="side-link" onClick={()=>{setMenuOpen(false);setTab('My activity');document.getElementById('markets')?.scrollIntoView({behavior:'smooth'})}}><FileText size={15}/> My Deals</button>
    <a className="side-link" href="/testnet.html" onClick={()=>setMenuOpen(false)}><Radio size={15}/> Network Lab</a>
+   <div className="side-divider"/>
+   <a className="side-link" href="/how-it-works" onClick={()=>setMenuOpen(false)}><FileText size={15}/> How it works</a>
+   <a className="side-link" href="/about" onClick={()=>setMenuOpen(false)}><Activity size={15}/> About Veylora</a>
+   <a className="side-link" href="/faq" onClick={()=>setMenuOpen(false)}><ShieldCheck size={15}/> FAQ</a>
+   <a className="side-link" href="/contact" onClick={()=>setMenuOpen(false)}><ArrowUpRight size={15}/> Contact &amp; Support</a>
    </nav>
   </div>
   <div className="market-dashboard">
