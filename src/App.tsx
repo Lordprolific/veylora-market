@@ -69,7 +69,6 @@ export default function App(){
    <button className="side-link" onClick={()=>{setMenuOpen(false);setCategoryFilter('dao-procurement');setTab('Discover');document.getElementById('markets')?.scrollIntoView({behavior:'smooth'})}}><ShieldCheck size={15}/> DAO Procurement</button>
    <button className="side-link" onClick={()=>{setMenuOpen(false);setCategoryFilter('web3-services');setTab('Discover');document.getElementById('markets')?.scrollIntoView({behavior:'smooth'})}}><FileText size={15}/> Web3 Services</button>
    <div className="side-divider"/>
-   <button className="side-link" onClick={()=>{setMenuOpen(false);setModal('create')}}><Plus size={15}/> Create Request</button>
    <button className="side-link" onClick={()=>{setMenuOpen(false);setTab('My activity');document.getElementById('markets')?.scrollIntoView({behavior:'smooth'})}}><LockKeyhole size={15}/> My Offers</button>
    <button className="side-link" onClick={()=>{setMenuOpen(false);setTab('My activity');document.getElementById('markets')?.scrollIntoView({behavior:'smooth'})}}><FileText size={15}/> My Deals</button>
    <a className="side-link" href="/testnet.html" onClick={()=>setMenuOpen(false)}><Radio size={15}/> Network Lab</a>
