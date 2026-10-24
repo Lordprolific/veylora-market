@@ -20,6 +20,7 @@ export default async function handler(req: Request, res: Response) {
   }
   const network = /^(tm|t2)/.test(address) ? 'testnet' : /^(t1|t3)/.test(address) ? 'mainnet' : null
   if (!network) return sendJson(res, 400, { ok: false, error: 'The signed Noir Wallet identity address did not match a supported transparent identity format.' })
+  if (network !== 'testnet') return sendJson(res, 400, { ok: false, error: 'Veylora Market beta accepts verified Zcash testnet identities only. No mainnet payment or identity is supported.' })
 
   try {
     const db = serviceClient()

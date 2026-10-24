@@ -23,6 +23,15 @@ export async function authenticatedUser(client: SupabaseClient, token: string) {
   return result.data.user
 }
 
+export async function hasVerifiedTestnetWallet(client: SupabaseClient, userId: string): Promise<boolean> {
+  const result = await client.from('wallet_identities')
+    .select('network')
+    .eq('user_id', userId)
+    .maybeSingle()
+  if (result.error) throw new Error('Could not verify the linked Zcash testnet wallet.')
+  return result.data?.network === 'testnet'
+}
+
 export function sendJson(res: { status: (code: number) => { json: (body: unknown) => unknown } }, code: number, body: unknown) {
   return res.status(code).json(body)
 }
