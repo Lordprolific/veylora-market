@@ -1348,7 +1348,6 @@ header{position:relative;}
 /* Two-surface experience: concise public introduction, dedicated marketplace workspace. */
 .landing-page .market-command-center,
 .landing-page #markets,
-.landing-page .exchange-pulse,
 .landing-page .settlement,
 .landing-page .privacy{display:none!important}
 .landing-page .site-footer{margin-top:0}
@@ -1370,4 +1369,24 @@ header{position:relative;}
  .landing-page .hero-actions button{justify-content:center}
  .landing-page .landing-note{align-items:flex-start;max-width:310px;line-height:1.6}
  .marketplace-page>main{padding-top:8px}
+}
+
+
+/* Keep the animated sample transaction visible on the public landing page. */
+.landing-page .exchange-pulse{
+  display:block!important;
+  margin:0;
+  padding:clamp(38px,5vw,64px) clamp(20px,8vw,110px);
+  border-bottom:1px solid rgba(205,211,222,.13);
+  background:
+    radial-gradient(ellipse at 82% 0%,rgba(211,218,230,.045),transparent 42%),
+    linear-gradient(180deg,#0b0c0f 0%,#090a0c 100%);
+}
+.landing-page .exchange-pulse .pulse-top{gap:24px}
+.landing-page .exchange-pulse .pulse-controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.landing-page .exchange-pulse .pulse-control{cursor:pointer}
+@media(max-width:700px){
+ .landing-page .exchange-pulse{padding:36px 18px}
+ .landing-page .exchange-pulse .pulse-top{gap:18px}
+ .landing-page .exchange-pulse .pulse-controls{justify-content:flex-start}
 }
