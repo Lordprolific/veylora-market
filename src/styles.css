@@ -1127,7 +1127,7 @@ html[data-theme="light"] .board-row,html[data-theme="light"] .recent-request{col
 
 
 /* Homepage hierarchy: the application dashboard is the first and primary surface */
-.dashboard-shell>header{display:none!important}
+/* Keep the primary production-style header visible on the dashboard. */
 .dashboard-shell>main{position:relative;z-index:1;padding-top:18px}
 .dashboard-shell .market-command-center{margin-top:0}
 .dashboard-shell .dashboard-topline{align-items:center}
