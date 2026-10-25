@@ -107,7 +107,7 @@ export default function App(){
     </section>
     <section className="dashboard-panel recent-panel"><div className="dashboard-panel-head"><div><span className="eyebrow muted">DATABASE SNAPSHOT</span><h3>Recent requests</h3></div><Activity size={17}/></div>
      <div className="recent-request-list">{markets.filter(m=>!m.demo).slice(0,4).map(m=><div className="recent-request" key={m.id}><span className="recent-mark"><FileText size={14}/></span><span><b>{m.title}</b><small>{categoryLabel(m.category)} · {m.owner}</small></span><small>{m.createdAt?new Date(m.createdAt).toLocaleDateString():'Saved record'}</small></div>)}
-      {markets.filter(m=>!m.demo).length===0&&<div className="recent-empty">No database requests have been published yet. Sample requests are kept separate from this feed.</div>}
+      {markets.filter(m=>!m.demo).length===0&&<div className="recent-empty">No database requests have been published yet. Preview requests are kept separate from this feed.</div>}
      </div>
      <div className="recent-disclaimer">This panel uses saved request records only. Offer, award and settlement events are not inferred.</div>
     </section>
