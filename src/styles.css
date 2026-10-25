@@ -1444,9 +1444,6 @@ header{position:relative;}
 @media(max-width:850px){.landing-page .landing-nav { gap: 10px; }.landing-page .landing-nav a { font-size: 10px; }}
 @media(max-width:700px){.landing-page .landing-nav { display: none; }}
 
-/* Small activity-stage adjustment: preserve the original layout and lift the character flow slightly. */
-.exchange-pulse .pulse-flow{transform:translate(4px,-8px)}
-@media(max-width:600px){.exchange-pulse .pulse-flow{transform:translateY(-5px)}}
 
 
 /* Fine adjustment: lift only the two participant portraits in the transfer stage. */
