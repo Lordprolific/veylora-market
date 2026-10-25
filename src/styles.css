@@ -1579,3 +1579,13 @@ html[data-theme="light"] .site-footer button:hover {
   color:#000 !important;
   text-decoration:underline;
 }
+
+
+/* Light mode only: keep the Veylora emblem dark and legible on pale surfaces. */
+html[data-theme="light"] .brand .mark,
+html[data-theme="light"] .dashboard-shell .brand .mark {
+  background: linear-gradient(145deg,#24262b,#08090b 78%,#000);
+  border-color:#25282e;
+  box-shadow: inset 0 0 0 3px #f4f6f9;
+  color:#fff;
+}
