@@ -15,27 +15,27 @@ type Bid = { id:string; marketId:string; amount:number; demo:boolean }
 type ActivityKind = 'transfer' | 'market'
 type ActivityItem = { id:number; kind:ActivityKind; title:string; detail:string; amount:string; from:string; to:string; time:string; demo:boolean }
 const activitySeed:ActivityItem[] = [
- {id:1,kind:'market',title:'Request preview',detail:'Token liquidity quote · Kim',amount:'25,000 ZEC',from:'Kim',to:'Open market',time:'Preview',demo:true},
- {id:2,kind:'market',title:'Request preview',detail:'Protocol security review · Alan',amount:'Audit scope',from:'Alan',to:'Open market',time:'Preview',demo:true},
- {id:3,kind:'market',title:'Request preview',detail:'Treasury infrastructure · Alan',amount:'Service scope',from:'Alan',to:'Open market',time:'Preview',demo:true},
- {id:4,kind:'market',title:'Offer preview',detail:'Private token quote · Barry',amount:'Offer hidden',from:'Barry',to:'Request owner',time:'Preview',demo:true},
- {id:5,kind:'market',title:'Request preview',detail:'Smart contract audit · Alan',amount:'Security review',from:'Alan',to:'Open market',time:'Preview',demo:true},
- {id:6,kind:'market',title:'Request preview',detail:'DAO contributor services · Alan',amount:'Service scope',from:'Alan',to:'Open market',time:'Preview',demo:true}
+ {id:1,kind:'market',title:'Request preview',detail:'Token liquidity quote · Maya',amount:'25,000 ZEC',from:'Maya',to:'Open market',time:'Preview',demo:true},
+ {id:2,kind:'market',title:'Request preview',detail:'Protocol security review · Oliver',amount:'Audit scope',from:'Oliver',to:'Open market',time:'Preview',demo:true},
+ {id:3,kind:'market',title:'Request preview',detail:'Treasury infrastructure · Oliver',amount:'Service scope',from:'Oliver',to:'Open market',time:'Preview',demo:true},
+ {id:4,kind:'market',title:'Offer preview',detail:'Private token quote · James',amount:'Offer hidden',from:'James',to:'Request owner',time:'Preview',demo:true},
+ {id:5,kind:'market',title:'Request preview',detail:'Smart contract audit · Oliver',amount:'Security review',from:'Oliver',to:'Open market',time:'Preview',demo:true},
+ {id:6,kind:'market',title:'Request preview',detail:'DAO contributor services · Oliver',amount:'Service scope',from:'Oliver',to:'Open market',time:'Preview',demo:true}
 ]
 const walletPairs = [
- {from:'Barry',to:'Kim',amount:'12.40 ZEC'},
- {from:'Kim',to:'Alan',amount:'4.80 ZEC'},
- {from:'Kim',to:'Barry',amount:'8.15 ZEC'},
- {from:'Alan',to:'Kim',amount:'2.75 ZEC'},
- {from:'Barry',to:'Alan',amount:'6.20 ZEC'}
+ {from:'James',to:'Maya',amount:'12.40 ZEC'},
+ {from:'Maya',to:'Oliver',amount:'4.80 ZEC'},
+ {from:'Maya',to:'James',amount:'8.15 ZEC'},
+ {from:'Oliver',to:'Maya',amount:'2.75 ZEC'},
+ {from:'James',to:'Oliver',amount:'6.20 ZEC'}
 ]
 const demos:Market[] = [
- {id:'demo-1',title:'Request a private token quote',description:'Compare private offers for a token transaction. Define the asset, target size, acceptable price range and settlement terms.',quantity:'25,000 ZEC · illustrative',closesAt:new Date(Date.now()+19*3600000).toISOString(),owner:'Barry',demo:true,status:'Open',bids:3,category:'otc'},
- {id:'demo-2',title:'Source a smart contract security review',description:'A protocol is seeking audit providers. Scope, methodology, delivery window and relevant experience should be assessed by the buyer.',quantity:'One audit engagement',closesAt:new Date(Date.now()+31*3600000).toISOString(),owner:'Alan',demo:true,status:'Open',bids:2,category:'web3-services'},
- {id:'demo-3',title:'DAO infrastructure procurement',description:'A DAO is comparing providers for infrastructure support. Suppliers should describe scope, service levels, delivery plan and total cost.',quantity:'One service contract',closesAt:new Date(Date.now()+42*3600000).toISOString(),owner:'Alan',demo:true,status:'Open',bids:0,category:'dao-procurement'}
+ {id:'demo-1',title:'Request a private token quote',description:'Compare private offers for a token transaction. Define the asset, target size, acceptable price range and settlement terms.',quantity:'25,000 ZEC · illustrative',closesAt:new Date(Date.now()+19*3600000).toISOString(),owner:'James',demo:true,status:'Open',bids:3,category:'otc'},
+ {id:'demo-2',title:'Source a smart contract security review',description:'A protocol is seeking audit providers. Scope, methodology, delivery window and relevant experience should be assessed by the buyer.',quantity:'One audit engagement',closesAt:new Date(Date.now()+31*3600000).toISOString(),owner:'Oliver',demo:true,status:'Open',bids:2,category:'web3-services'},
+ {id:'demo-3',title:'DAO infrastructure procurement',description:'A DAO is comparing providers for infrastructure support. Suppliers should describe scope, service levels, delivery plan and total cost.',quantity:'One service contract',closesAt:new Date(Date.now()+42*3600000).toISOString(),owner:'Oliver',demo:true,status:'Open',bids:0,category:'dao-procurement'}
 ]
 const initials=(s:string)=>s.split(' ').map(x=>x[0]).join('').slice(0,2).toUpperCase()
-const faceIds:Record<string,number>={'Kim':12,'Alan':47,'Barry':32,'North Wallet':12,'Cedar Wallet':47,'Silver Wallet':32,'Atlas Wallet':68,'Meridian Wallet':44,'Fieldstone Wallet':15,'Supplier wallet':53,'RFQ owner':29,'Open market':8,'Northstar Materials':12,'Meridian Projects':44,'Fieldstone Procurement':15,'You':68}
+const faceIds:Record<string,number>={'Maya':12,'Olivia':24,'Emily':23,'Oliver':47,'Oliver':47,'James':32,'James':32,'North Wallet':12,'Cedar Wallet':47,'Silver Wallet':32,'Atlas Wallet':68,'Meridian Wallet':44,'Fieldstone Wallet':15,'Supplier wallet':53,'RFQ owner':29,'Open market':8,'Northstar Materials':12,'Meridian Projects':44,'Fieldstone Procurement':15,'You':68}
 const humanAvatar=(name:string,small=false)=>{const id=faceIds[name]??(name.toLowerCase().includes('cedar')?47:name.toLowerCase().includes('silver')?32:name.toLowerCase().includes('atlas')?68:name.toLowerCase().includes('meridian')?44:name.toLowerCase().includes('fieldstone')?15:12);return <img className={small?'human-face small':'human-face'} src={`https://i.pravatar.cc/96?img=${id}`} alt="" loading="lazy" referrerPolicy="no-referrer"/>}
 const left=(s:string)=>Math.max(0,Math.ceil((new Date(s).getTime()-Date.now())/3600000))+'h left'
 export default function App(){
