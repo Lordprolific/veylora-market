@@ -1444,8 +1444,6 @@ header{position:relative;}
 @media(max-width:850px){.landing-page .landing-nav { gap: 10px; }.landing-page .landing-nav a { font-size: 10px; }}
 @media(max-width:700px){.landing-page .landing-nav { display: none; }}
 
-/* Center the market activity stage and give the stream room to breathe. */
-.exchange-pulse .pulse-body{grid-template-columns:minmax(0,920px);justify-content:center;gap:16px;margin:0 auto;max-width:920px}
-.exchange-pulse .pulse-feature{min-height:270px}
-.exchange-pulse .pulse-flow{justify-content:center;grid-template-columns:minmax(0,1fr) minmax(60px,.5fr) minmax(0,1fr) auto}
-@media(max-width:600px){.exchange-pulse .pulse-flow{grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr)}.exchange-pulse .pulse-amount{grid-column:1/-1}}
+/* Small activity-stage adjustment: preserve the original layout and lift the character flow slightly. */
+.exchange-pulse .pulse-flow{transform:translate(4px,-8px)}
+@media(max-width:600px){.exchange-pulse .pulse-flow{transform:translateY(-5px)}}
