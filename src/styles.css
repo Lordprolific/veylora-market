@@ -1447,3 +1447,7 @@ header{position:relative;}
 /* Small activity-stage adjustment: preserve the original layout and lift the character flow slightly. */
 .exchange-pulse .pulse-flow{transform:translate(4px,-8px)}
 @media(max-width:600px){.exchange-pulse .pulse-flow{transform:translateY(-5px)}}
+
+
+/* Fine adjustment: lift only the two participant portraits in the transfer stage. */
+.exchange-pulse .pulse-flow .pulse-avatar{transform:translateY(-6px)}
