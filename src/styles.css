@@ -1544,3 +1544,38 @@ html[data-theme="light"] .theme-options { background:#e9edf2; border-color:#aeb7
 html[data-theme="light"] .theme-options button { color:#394150; }
 html[data-theme="light"] .theme-options button.selected { background:#fff; color:#11151b; border-color:#8e99a8; box-shadow:0 1px 4px rgba(25,35,50,.14); }
 html[data-theme="light"] .theme-label { color:#424b59; }
+
+
+/* Light mode only: make footer copy and links dark enough on pale surfaces. */
+html[data-theme="light"] footer,
+html[data-theme="light"] .site-footer,
+html[data-theme="light"] .dashboard-shell footer,
+html[data-theme="light"] .dashboard-shell .site-footer {
+  background:#f4f6f9 !important;
+  color:#17191d !important;
+  border-top:1px solid #cbd2dc;
+}
+html[data-theme="light"] footer > span,
+html[data-theme="light"] .site-footer > span,
+html[data-theme="light"] footer p,
+html[data-theme="light"] .site-footer p,
+html[data-theme="light"] footer small,
+html[data-theme="light"] .site-footer small,
+html[data-theme="light"] footer .brand b,
+html[data-theme="light"] .site-footer .brand b {
+  color:#17191d !important;
+}
+html[data-theme="light"] footer a,
+html[data-theme="light"] footer button,
+html[data-theme="light"] .site-footer a,
+html[data-theme="light"] .site-footer button {
+  color:#20242b !important;
+  text-decoration-color:#20242b;
+}
+html[data-theme="light"] footer a:hover,
+html[data-theme="light"] footer button:hover,
+html[data-theme="light"] .site-footer a:hover,
+html[data-theme="light"] .site-footer button:hover {
+  color:#000 !important;
+  text-decoration:underline;
+}
