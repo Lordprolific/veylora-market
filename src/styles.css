@@ -1443,3 +1443,104 @@ header{position:relative;}
 .marketplace-page .hero, .marketplace-page .flow-section { display: none !important; }
 @media(max-width:850px){.landing-page .landing-nav { gap: 10px; }.landing-page .landing-nav a { font-size: 10px; }}
 @media(max-width:700px){.landing-page .landing-nav { display: none; }}
+
+
+/* High-contrast light appearance: readable text and clearly separated surfaces. */
+html[data-theme="light"] body,
+html[data-theme="light"] .shell,
+html[data-theme="light"] .dashboard-shell,
+html[data-theme="light"] .marketplace-page,
+html[data-theme="light"] main { color:#17191d; }
+html[data-theme="light"] .dashboard-shell .hero,
+html[data-theme="light"] .dashboard-shell .flow-section,
+html[data-theme="light"] .dashboard-shell .exchange-pulse,
+html[data-theme="light"] .dashboard-shell .market-command-center,
+html[data-theme="light"] .dashboard-shell #markets,
+html[data-theme="light"] .dashboard-shell .site-footer {
+  background-color:#f4f6f9;
+  color:#17191d;
+}
+html[data-theme="light"] .dashboard-shell .hero {
+  background:linear-gradient(112deg,#ffffff 0%,#f0f3f7 58%,#fafbfc 100%);
+  border-color:#cbd2dc;
+}
+html[data-theme="light"] .dashboard-shell .flow-section,
+html[data-theme="light"] .dashboard-shell .exchange-pulse {
+  background:linear-gradient(180deg,#f7f8fa 0%,#edf0f4 100%);
+  border-color:#d0d6df;
+}
+html[data-theme="light"] .dashboard-shell .flow-step,
+html[data-theme="light"] .dashboard-shell .pulse-card,
+html[data-theme="light"] .dashboard-shell .dashboard-panel,
+html[data-theme="light"] .dashboard-shell .overview-cell,
+html[data-theme="light"] .dashboard-shell .market,
+html[data-theme="light"] .dashboard-shell .receipt,
+html[data-theme="light"] .dashboard-shell .notice,
+html[data-theme="light"] .dashboard-shell .settlement,
+html[data-theme="light"] .dashboard-shell .privacy {
+  background:#fff;
+  color:#20242b;
+  border-color:#cbd2dc;
+  box-shadow:0 5px 18px rgba(25,35,50,.06);
+}
+html[data-theme="light"] .dashboard-shell h1,
+html[data-theme="light"] .dashboard-shell h2,
+html[data-theme="light"] .dashboard-shell h3,
+html[data-theme="light"] .dashboard-shell b,
+html[data-theme="light"] .dashboard-shell strong,
+html[data-theme="light"] .dashboard-shell .pulse-amount,
+html[data-theme="light"] .dashboard-shell .pulse-name,
+html[data-theme="light"] .dashboard-shell .board-title,
+html[data-theme="light"] .dashboard-shell .dashboard-topline h2 {
+  color:#17191d;
+}
+html[data-theme="light"] .dashboard-shell p,
+html[data-theme="light"] .dashboard-shell small,
+html[data-theme="light"] .dashboard-shell label,
+html[data-theme="light"] .dashboard-shell .muted,
+html[data-theme="light"] .dashboard-shell .hero-foot,
+html[data-theme="light"] .dashboard-shell .art-caption,
+html[data-theme="light"] .dashboard-shell .flow-step p,
+html[data-theme="light"] .dashboard-shell .pulse-meta,
+html[data-theme="light"] .dashboard-shell .pulse-time,
+html[data-theme="light"] .dashboard-shell .dashboard-topline p,
+html[data-theme="light"] .dashboard-shell .overview-cell>small,
+html[data-theme="light"] .dashboard-shell .recent-empty,
+html[data-theme="light"] .dashboard-shell .recent-disclaimer {
+  color:#4b5563;
+}
+html[data-theme="light"] .dashboard-shell .market-primary-nav,
+html[data-theme="light"] .dashboard-shell .header-menu {
+  background:#fff;
+  border-color:#c4cbd5;
+  box-shadow:0 18px 42px rgba(25,35,50,.16);
+}
+html[data-theme="light"] .dashboard-shell .market-primary-nav .side-link,
+html[data-theme="light"] .dashboard-shell .header-menu a {
+  color:#303844;
+}
+html[data-theme="light"] .dashboard-shell .market-primary-nav .side-link:hover,
+html[data-theme="light"] .dashboard-shell .market-primary-nav .side-link.active,
+html[data-theme="light"] .dashboard-shell .header-menu a:hover {
+  background:#e9edf2;
+  color:#11151b;
+  border-color:#d0d6df;
+}
+html[data-theme="light"] .dashboard-shell .quiet,
+html[data-theme="light"] .dashboard-shell .search,
+html[data-theme="light"] .dashboard-shell input,
+html[data-theme="light"] .dashboard-shell textarea,
+html[data-theme="light"] .dashboard-shell select {
+  background:#fff;
+  color:#17191d;
+  border-color:#aeb7c4;
+}
+html[data-theme="light"] .dashboard-shell .quiet:hover,
+html[data-theme="light"] .dashboard-shell button:not(.primary):hover {
+  color:#11151b;
+  border-color:#7f8a99;
+}
+html[data-theme="light"] .theme-options { background:#e9edf2; border-color:#aeb7c4; }
+html[data-theme="light"] .theme-options button { color:#394150; }
+html[data-theme="light"] .theme-options button.selected { background:#fff; color:#11151b; border-color:#8e99a8; box-shadow:0 1px 4px rgba(25,35,50,.14); }
+html[data-theme="light"] .theme-label { color:#424b59; }
