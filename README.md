@@ -2,7 +2,7 @@
 
 Veylora Market is an experimental privacy-focused Web3 deal desk for requests for quotation (RFQs) and competing offers. The first supported deal categories are OTC and token deals, DAO procurement, and Web3 services. A buyer publishes a request, suppliers submit offers, the buyer closes and awards the request under the current rule, and Zcash testnet settlement evidence is checked separately.
 
-> **Status: testnet beta.** Wallet connection and signature-based sign-in, persistent RFQ/offer storage, server-side award handling, category-aware Web3 requests, verified-testnet-wallet write policies, and a transparent-output testnet settlement verifier are implemented. This is not an audited marketplace, does not provide operator-blind auctions, and must not be used for valuable trades.
+> **Status: testnet beta.** Wallet connection and signature-based sign-in, persistent RFQ/offer storage, server-side award handling, category-aware Web3 requests, verified-testnet-wallet write policies, and a transparent-output testnet settlement verifier are implemented. The marketplace applies access controls to bid data, but has not been independently audited. Do not use it for valuable trades.
 
 Live app: https://veylora-market.vercel.app/
 
@@ -10,8 +10,7 @@ Live app: https://veylora-market.vercel.app/
 
 - **V2 deal categories:** OTC & token deals, DAO procurement, and Web3 services share one RFQ/offer lifecycle. Liquidity and market-maker sourcing are planned for a later phase. Category selection is stored with each database RFQ; existing requests default to OTC for compatibility.
 - **Award-rule limitation:** the current server-side award endpoint selects the lowest eligible offer, breaking ties by earliest commitment, across all categories. It does not score audit quality, provider experience, delivery plans, or qualitative service proposals. Buyers must not treat an automatic award as a quality assessment; category-specific evaluation is future work.
-- **Wallet-gated writes:** RLS requires a server-verified Zcash testnet wallet identity before a session can create a market or submit an offer. Users can read only their own verified wallet identity; wallet-auth challenges remain server-only.
-
+- **Bid access controls:** row-level security policies restrict bid reads through the client-facing database interface to the submitting bidder, and client-side bid updates and deletes are disabled by policy. Protected writes require a server-verified Zcash testnet wallet identity. These are application access controls, not a cryptographic zero-knowledge auction protocol.
 - **Wallet connection and identity verification:** connect through a supported injected Noir Wallet-compatible Zcash provider. Veylora requests a short-lived, origin-bound sign-in challenge; the wallet signs it; the server verifies the signature and links the wallet identity to the current Supabase session. This signature proves control of the wallet identity; it does not authorize a payment.
 - **Wallet fallback:** when no supported provider is detected, the app links to the confirmed Veylora testnet wallet extension release. The extension's direct native connection to the Market must be treated separately from the working provider-based sign-in path; do not assume the download link alone establishes a connection.
 - **Persistent RFQs and offers:** non-demo requests and offers are written to Supabase. Sample RFQs and transfer/activity previews are demo content and do not represent real transactions.
@@ -67,12 +66,12 @@ Requirements: Node.js/npm, a Supabase project, and a Vercel-compatible environme
 
 8. Deploy a Vercel preview and test wallet connection, sign-in, RFQ creation, offer submission, close/award, and settlement checks before sharing it.
 
-## Important limitations
+## Privacy and security scope
 
-- **Not operator-blind:** bid rows are restricted by the current client-facing row-level security policies, but the platform operator and privileged server credentials may be able to access stored bid data. This is not zero-knowledge auction execution.
-- **No guaranteed privacy for metadata:** shielded Zcash does not automatically hide RFQ details, wallet identity metadata, IP/request logs, or data stored by the application.
-- **Transparent outputs only:** the settlement verifier does not verify shielded payment details or prove recipient ownership. A transaction ID alone is not proof of payment.
-- **The app does not broadcast settlement payments:** users must make payments through a wallet. The server checks the supplied transaction against configured testnet RPC evidence.
+- **Bid confidentiality:** client-facing row-level security policies restrict bid reads to the submitting bidder, and client-side bid updates and deletes are disabled by policy. Verify these policies against the deployed database and test with separate accounts before relying on them in production.
+- **Metadata:** Zcash shielded transactions do not automatically shield RFQ details, wallet identity metadata, IP/request logs, or information stored by the application. Avoid including sensitive personal or commercial details in public RFQs.
+- **Settlement verification:** the verifier checks transparent transaction outputs only. It does not verify shielded payment details or prove recipient ownership. A transaction ID alone is not proof of payment.
+- **Payment flow:** the app does not broadcast settlement payments. Users make payments through a wallet; the server checks the supplied transaction against configured testnet RPC evidence.
 - **Testnet only:** testnet assets have no intended monetary value. Mainnet or valuable trades are out of scope.
 - **Wallet support:** the Market currently uses `@noir-wallet/sdk` and its injected provider interface. The standalone Veylora extension is a separate project; native extension-to-site connectivity should only be claimed after the bridge and end-to-end browser tests have passed.
 - **Anonymous session recovery:** wallet-first sessions use Supabase anonymous sessions. Account recovery or cross-device restoration is not implemented; clearing browser/site data can lose access to that session.
