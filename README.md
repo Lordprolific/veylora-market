@@ -12,7 +12,7 @@ Live app: https://veylora-market.vercel.app/
 - **Award-rule limitation:** the current server-side award endpoint selects the lowest eligible offer, breaking ties by earliest commitment, across all categories. It does not score audit quality, provider experience, delivery plans, or qualitative service proposals. Buyers must not treat an automatic award as a quality assessment; category-specific evaluation is future work.
 - **Bid access controls:** row-level security policies restrict bid reads through the client-facing database interface to the submitting bidder, and client-side bid updates and deletes are disabled by policy. Protected writes require a server-verified Zcash testnet wallet identity. These are application access controls, not a cryptographic zero-knowledge auction protocol.
 - **Wallet connection and identity verification:** connect through a supported injected Noir Wallet-compatible Zcash provider. Veylora requests a short-lived, origin-bound sign-in challenge; the wallet signs it; the server verifies the signature and links the wallet identity to the current Supabase session. This signature proves control of the wallet identity; it does not authorize a payment.
-- **Wallet fallback:** when no supported provider is detected, the app links to the confirmed Veylora testnet wallet extension release. The extension's direct native connection to the Market must be treated separately from the working provider-based sign-in path; do not assume the download link alone establishes a connection.
+- **Wallet fallback:** when no supported provider is detected, the app links to the official Veylora testnet wallet download page at `/wallet-download.html`. Wallet version 0.3.3 launches its full UI in an extension tab to support WebZjs cross-origin isolation. The extension's direct native connection to the Market remains a separate end-to-end verification gate; the download link does not itself establish a connection.
 - **Persistent RFQs and offers:** non-demo requests and offers are written to Supabase. Sample RFQs and transfer/activity previews are demo content and do not represent real transactions.
 - **Server-side close and award:** the owner can close a request after its deadline. The server selects the lowest eligible offer, breaking ties by earliest commitment, and records the result. Awarding a request is not the same as paying or completing it.
 - **Settlement state handling:** payment submission, network confirmation, and owner-confirmed completion are separate states.
@@ -80,7 +80,8 @@ Requirements: Node.js/npm, a Supabase project, and a Vercel-compatible environme
 ## Related projects and documentation
 
 - [Veylora Zcash Wallet](https://github.com/Lordprolific/veylora-testnet-wallet)
-- [Confirmed testnet wallet release](https://github.com/Lordprolific/veylora-testnet-wallet/releases/tag/wallet-confirmed-2026-10-19)
+- [Veylora Wallet 0.3.3 isolated-page release](https://github.com/Lordprolific/veylora-testnet-wallet/releases/tag/wallet-isolated-2026-10-27)
+- [Wallet download and installation page](https://veylora-market.vercel.app/wallet-download.html)
 - [Wallet integration notes](./docs/VEYLORA-WALLET-INTEGRATION.md)
 - [Testnet integration guide](./docs/TESTNET-INTEGRATION.md)
 - [Release checklist](./docs/RELEASE-CHECKLIST.md)
