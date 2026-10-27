@@ -1443,3 +1443,8 @@ header{position:relative;}
 .marketplace-page .hero, .marketplace-page .flow-section { display: none !important; }
 @media(max-width:850px){.landing-page .landing-nav { gap: 10px; }.landing-page .landing-nav a { font-size: 10px; }}
 @media(max-width:700px){.landing-page .landing-nav { display: none; }}
+
+
+
+/* Fine adjustment: lift only the two participant portraits in the transfer stage. */
+.exchange-pulse .pulse-flow .pulse-avatar{transform:translateY(-6px)}
