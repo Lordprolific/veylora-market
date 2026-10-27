@@ -24,20 +24,20 @@
   <main class="main">
     <div class="eyebrow"><span class="dot"></span>WALLET SETUP</div>
     <h1>Your wallet.<br>When you're ready.</h1>
-    <p class="intro">Veylora Market connects to a compatible Veylora Wallet for Zcash testnet actions. We couldn't detect a supported wallet in this browser, so you're here to choose the next step. Nothing has been downloaded automatically.</p>
+    <p class="intro">Veylora Wallet 0.3.3 is the latest planned testnet extension update. This page gives you the official download and installation steps. Nothing is downloaded automatically.</p>
     <section class="panel">
       <div class="panel-head"><div class="shield" aria-hidden="true"><img src="/veylora-mark.svg" alt=""></div><div><h2>Veylora Wallet · Testnet</h2><p>Official browser extension · Testnet only</p></div></div>
-      <p>Download the latest confirmed Veylora testnet extension, then follow the official installation steps. This build includes improved handling when the testnet gRPC service fails during local wallet initialization. It does not guarantee that the remote testnet service is online.</p>
+      <p>Version 0.3.3 opens the full wallet in its own extension tab instead of initializing WebZjs from the toolbar popup. The package build checks the extension's cross-origin isolation manifest policies and required dApp bridge files. This improves the initialization context but does not guarantee that remote testnet services are available or prove that Market connectivity works end to end.</p>
       <div class="actions">
-        <a class="button primary" href="https://github.com/Lordprolific/veylora-testnet-wallet/releases/latest/download/veylora-chrome-extension-testnet.zip" rel="noopener">Download updated wallet ↗</a>
+        <a class="button primary" href="https://github.com/Lordprolific/veylora-testnet-wallet/releases/download/wallet-isolated-2026-10-27/veylora-chrome-extension-testnet.zip" rel="noopener">Download updated wallet ↗</a>
         <a class="button secondary" href="https://github.com/Lordprolific/veylora-testnet-wallet/blob/main/DOWNLOAD.md" rel="noopener">Installation instructions</a>
         <a class="button secondary" href="/">Return to Veylora Market</a>
       </div>
     </section>
     <div class="steps" aria-label="Setup steps">
       <div class="step"><b>01 / REVIEW</b><p>Read the official instructions and confirm you're using the Veylora testnet wallet.</p></div>
-      <div class="step"><b>02 / INSTALL</b><p>Choose to download and install the extension from the official guide.</p></div>
-      <div class="step"><b>03 / CONNECT</b><p>Return here and connect your wallet when you're ready.</p></div>
+      <div class="step"><b>02 / INSTALL</b><p>Extract the ZIP and load the folder containing manifest.json through chrome://extensions.</p></div>
+      <div class="step"><b>03 / OPEN & TEST</b><p>Open the wallet in its own tab, then return here. Market connection still requires a successful browser test.</p></div>
     </div>
     <div class="notice"><strong>Testnet safety:</strong> Veylora Market is a beta. Use testnet funds only. Never enter a seed phrase or private key into this website, and never send mainnet funds for testnet actions.</div>
   </main>
