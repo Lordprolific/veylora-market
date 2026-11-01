@@ -1,21 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
-    {
-      "source": "/marketplace",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/marketplace/",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/dashboard",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/dashboard/",
-      "destination": "/index.html"
-    }
+    { "source": "/marketplace", "destination": "/index.html" },
+    { "source": "/marketplace/", "destination": "/index.html" },
+    { "source": "/dashboard", "destination": "/index.html" },
+    { "source": "/dashboard/", "destination": "/index.html" }
   ]
 }
