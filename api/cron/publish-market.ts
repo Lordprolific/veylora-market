@@ -13,11 +13,13 @@ const opportunities = [
 
 export default async function handler(req: Request, res: Response) {
   if (req.method !== 'GET') return sendJson(res, 405, { ok: false, error: 'Use GET.' })
-  const secret = process.env.CRON_SECRET
-  const auth = req.headers?.authorization
-  const supplied = Array.isArray(auth) ? auth[0] : auth
-  const expected = secret?.startsWith('Bearer ') ? secret : `Bearer ${secret}`
-  if (!secret || supplied !== expected) return sendJson(res, 401, { ok: false, error: 'Unauthorized.' })
+  const secret = (process.env.CRON_SECRET || '').trim().replace(/^Bearer\\s+/i, '')
+  const headerValue = req.headers?.['x-vey lora-cron-secret'] ?? req.headers?.['x-vey lora-cron-secret'.replace(' ', '')] ?? req.headers?.authorization
+  const suppliedHeader = Array.isArray(headerValue) ? headerValue[0] : headerValue
+  const supplied = (suppliedHeader || '').trim().replace(/^Bearer\\s+/i, '')
+  if (!secret || !supplied || supplied !== secret) {
+    return sendJson(res, 401, { ok: false, error: 'Unauthorized.', diagnostic: { secretConfigured: !!secret, suppliedHeaderPresent: !!supplied, secretLength: secret.length, suppliedLength: supplied.length } })
+  }
   const ownerId = process.env.VEYLORA_PUBLISHER_USER_ID
   if (!ownerId || !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(ownerId)) {
     return sendJson(res, 503, { ok: false, error: 'Publisher identity is not configured.' })
