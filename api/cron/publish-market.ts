@@ -16,7 +16,8 @@ export default async function handler(req: Request, res: Response) {
   const secret = process.env.CRON_SECRET
   const auth = req.headers?.authorization
   const supplied = Array.isArray(auth) ? auth[0] : auth
-  if (!secret || supplied !== `Bearer ${secret}`) return sendJson(res, 401, { ok: false, error: 'Unauthorized.' })
+  const expected = secret?.startsWith('Bearer ') ? secret : `Bearer ${secret}`
+  if (!secret || supplied !== expected) return sendJson(res, 401, { ok: false, error: 'Unauthorized.' })
   const ownerId = process.env.VEYLORA_PUBLISHER_USER_ID
   if (!ownerId || !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(ownerId)) {
     return sendJson(res, 503, { ok: false, error: 'Publisher identity is not configured.' })
